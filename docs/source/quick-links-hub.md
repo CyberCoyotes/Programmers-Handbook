@@ -17,6 +17,9 @@ Command-Based Programming Guide:
 WPILib API (Java):
 <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/>
 
+Java Downloads
+<https://www.oracle.com/java/technologies/downloads/>
+
 ## 🧰 Software Downloads & Tools
 
 National Instruments (NI)
@@ -24,7 +27,7 @@ National Instruments (NI)
 NI Game Tools (Driver Station, Imaging Tool):
 <https://www.ni.com/en/support/downloads/drivers/download.first-robotics-competition.html>
 
-## VS Code & Java
+### VS Code & Java
 
 FRC VS Code Install Guide:
 <https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html>
@@ -32,7 +35,7 @@ FRC VS Code Install Guide:
 Java Language Docs:
 <https://docs.oracle.com/en/java/>
 
-## 🔧 CTRE (Phoenix 6 Ecosystem)
+### 🔧 CTRE (Phoenix 6 Ecosystem)
 
 Primary motor control & swerve platform
 
@@ -51,7 +54,7 @@ Tuner X Swerve Generator:
 CTRE Firmware Downloads:
 <https://store.ctr-electronics.com/software/>
 
-## 🟩 Limelight (Vision)
+### 🟩 Limelight (Vision)
 
 Limelight Docs (MAIN):
 <https://docs.limelightvision.io/>
