@@ -1391,6 +1391,8 @@ public final class AutonomousRoutines {
 2. Replace `.withTimeout(2.0)` on the intake command with a sensor trigger — schedule `ElevatorCommands.goTo(STOWED)` automatically the moment `intake.hasPiece()` becomes true.
 3. Add a `SendableChooser` in `RobotContainer` that lets you pick between scoring L4+L2 (this routine) and a simpler L1-only routine for qualification matches where you just need to leave the zone.
 
+> **Full project:** [`companion/level-5/ElevatorAuto`](https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-5/ElevatorAuto)
+
 ---
 
 ## **Common Patterns Summary**

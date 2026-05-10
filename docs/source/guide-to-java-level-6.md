@@ -585,6 +585,8 @@ public final class AutonomousRoutines {
 - Tune the stdDevs by logging `drivetrain.getPose()` vs. raw vision pose across several test runs and computing average error at different distances
 - Add a `ShuffleboardTab` that shows: last vision update age, tag count, current pose, estimated error
 
+> **Full project:** [`companion/level-6/VisionAssistedAuto`](https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-6/VisionAssistedAuto)
+
 ---
 
 ## **Reference Card**

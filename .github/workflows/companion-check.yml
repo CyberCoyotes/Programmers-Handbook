@@ -1,0 +1,53 @@
+name: Companion Projects Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  companion-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify companion project files exist
+        run: |
+          missing=0
+          check() {
+            if [ ! -f "$1" ]; then
+              echo "MISSING: $1"
+              missing=$((missing + 1))
+            else
+              echo "OK: $1"
+            fi
+          }
+
+          check companion/level-1/MatchScorer/MatchScorer.java
+
+          check companion/level-2/IntakeSubsystem/IntakeSubsystem.java
+          check companion/level-2/IntakeSubsystem/IntakeCapstone.java
+
+          check companion/level-3/CoordinatedRobot/IntakeSubsystem.java
+          check companion/level-3/CoordinatedRobot/ArmSubsystem.java
+          check companion/level-3/CoordinatedRobot/CoordinatedTeleOp.java
+
+          check companion/level-4/CommandIntake/Constants.java
+          check companion/level-4/CommandIntake/IntakeSubsystem.java
+          check companion/level-4/CommandIntake/IntakeCommands.java
+          check companion/level-4/CommandIntake/RobotContainer.java
+
+          check companion/level-5/ElevatorAuto/ElevatorCommands.java
+          check companion/level-5/ElevatorAuto/AutonomousRoutines.java
+
+          check companion/level-6/VisionAssistedAuto/VisionSubsystem.java
+          check companion/level-6/VisionAssistedAuto/VisionPoseUpdater.java
+          check companion/level-6/VisionAssistedAuto/DriveToNearestScoringLocation.java
+          check companion/level-6/VisionAssistedAuto/AutonomousRoutines.java
+
+          if [ $missing -gt 0 ]; then
+            echo ""
+            echo "ERROR: $missing expected companion file(s) are missing."
+            exit 1
+          fi
+          echo ""
+          echo "All companion project files present."
