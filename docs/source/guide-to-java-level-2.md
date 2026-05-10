@@ -21,7 +21,10 @@ Middle school FTC students who have completed **Level 1: Java Foundations**. Thi
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
-                    Ready to program your robot!
+┌─────────────────────────────────────────────────────────────┐
+│              LEVEL 3: Advanced FTC Patterns                 │
+│   State machines • Subsystem classes • Competition code     │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 **Already know Java?** Skip to Part 2 and start learning FTC-specific patterns.
@@ -54,6 +57,10 @@ Every FTC program is an **OpMode**. There are two types:
 | `OpMode` | Advanced (iterative) | Runs in a loop like a game engine |
 
 **Start with `LinearOpMode`** — it's easier to understand.
+
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **`LinearOpMode` and the converging ecosystem.** Current FTC programs extend `LinearOpMode` and put everything inside a single `runOpMode()` method. As FTC converges with the WPILib ecosystem, the program structure will shift to separate lifecycle methods — `init()`, `periodic()`, `teleopPeriodic()`, `autonomousPeriodic()` — matching what FRC teams write today. The concepts are identical: setup before the match, a loop during the match, a stop at the end. Only the method names and structure change. When you reach Level 4, this pattern will feel familiar.
 
 ---
 
@@ -129,6 +136,10 @@ leftMotor = hardwareMap.get(DcMotor.class, "leftMotor");
 // The string "leftMotor" must match the name in your robot configuration!
 ```
 
+!!! note "Coach"
+    <!-- category: hardware-specific gotcha -->
+    **Hardware names are case-sensitive and must be exact.** `"leftMotor"`, `"LeftMotor"`, and `"left_motor"` are three different names to the SDK. Students will stare at perfectly correct code that does nothing because the string in `hardwareMap.get()` doesn't match what was typed into the Driver Hub configuration. Before every practice session with new students, verify the robot config together. As a diagnostic habit, have students add a `telemetry.addData("Status", "Hardware OK")` line immediately after all `hardwareMap.get()` calls — if it appears on screen, initialization succeeded.
+
 **4\. The main loop:**
 
 ```java
@@ -137,6 +148,10 @@ while (opModeIsActive()) {
     // Put your teleop control code here
 }
 ```
+
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Forgetting `while (opModeIsActive())` is the most common first-session mistake.** Without the loop, the code runs the gamepad line exactly once and then the program ends — the robot does nothing when the student pushes the stick. When this happens, resist the urge to point it out immediately. Let the student add telemetry to see what's executing, then ask: "how many times does this line run?" That question usually gets them to the answer faster than telling them.
 
 ---
 
@@ -207,6 +222,14 @@ boolean dpadLeft = gamepad1.dpad_left;
 boolean dpadRight = gamepad1.dpad_right;
 ```
 
+!!! note "Coach"
+    <!-- category: hardware-specific gotcha -->
+    **Joystick Y-axis is inverted — always.** Pushing the stick forward returns a *negative* value. Every student discovers this the first time they push forward and the robot drives backward. Let them hit it. When they do, show them the one-character fix: `double drive = -gamepad1.left_stick_y;`. Negating the input is a permanent habit — it applies to every robot they will ever program.
+
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **Buttons as booleans vs. Triggers.** In current FTC, `gamepad1.a` returns a plain `boolean`. In FRC and the converging FTC ecosystem, controller inputs are wrapped as `Trigger` objects: `new JoystickButton(controller, 1).onTrue(someCommand)`. The underlying idea is the same — detect a button press, do something — but the API becomes composable and declarative instead of imperative. When you reach Level 4, the boolean checks you learned here will map directly onto Trigger bindings.
+
 ### **Telemetry (Driver Station Display)**
 
 ```java
@@ -218,6 +241,10 @@ telemetry.addData("Button A", gamepad1.a);
 // Must call update() to actually show it!
 telemetry.update();
 ```
+
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **`telemetry.update()` must be called to push data to the screen.** `addData()` only queues the data; `update()` sends it. Students who forget this see a blank Driver Station display and assume their sensors are broken. Telemetry is your primary debugging tool for robot code — teach students to instrument everything from the start: motor powers, gamepad values, sensor readings, state flags. A robot you can observe is a robot you can debug.
 
 ---
 
@@ -264,6 +291,10 @@ while (opModeIsActive()) {
     }
 }
 ```
+
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **This if/else chain works for 2-3 states. Then it gets painful.** Add a third mode ("hold with gentle reverse power"), a fourth ("slow intake for delicate pieces"), and a need to track the *last* action after you release the button — and the inline if/else becomes unreadable fast. Level 3 solves this with a state machine: an enum field that tracks the current mode, and methods that set it. The pattern you're seeing here is the *problem* that Level 3 addresses. When students write code that feels tangled, remind them Level 3 has the answer.
 
 ### **Toggle with Button Press**
 
@@ -447,63 +478,124 @@ public class OrganizedTeleOp extends LinearOpMode {
 
 ---
 
-## **Common Mistakes to Avoid**
+## **Capstone: `IntakeSubsystem`**
 
-### **❌ Forgetting telemetry.update()**
+You've learned hardware control, gamepad input, telemetry, and subsystem classes. Now put them together into a realistic mechanism.
 
-```java
-// BAD - nothing shows on screen
-telemetry.addData("Power", motor.getPower());
+**The task:** Build a single-motor intake that tracks what it is currently doing using a state enum. The capstone shows the progression from "inline if/else" to "method on a subsystem class" — the same progression your real competition code will follow.
 
-// GOOD - data actually displays
-telemetry.addData("Power", motor.getPower());
-telemetry.update();
-```
+**Why a state field matters:** Without one, you lose track of what the intake was doing when the driver releases the button. With one, any part of the code can ask `intake.getState()` and get an honest answer.
 
-### **❌ Wrong hardware names**
+### **Step 1 — The naive approach (works, but has limits)**
 
 ```java
-// If your config says "left_drive", use exactly that!
-motor = hardwareMap.get(DcMotor.class, "left_drive");  // GOOD
-motor = hardwareMap.get(DcMotor.class, "leftDrive");   // BAD - won't find it
-```
-
-### **❌ Forgetting the while loop in TeleOp**
-
-```java
-// BAD - only runs once
-waitForStart();
-leftMotor.setPower(gamepad1.left_stick_y);
-
-// GOOD - runs continuously
-waitForStart();
 while (opModeIsActive()) {
-    leftMotor.setPower(gamepad1.left_stick_y);
+    if (gamepad1.a) {
+        intakeMotor.setPower(1.0);
+    } else if (gamepad1.b) {
+        intakeMotor.setPower(-0.15);  // gentle hold
+    } else {
+        intakeMotor.setPower(0);
+    }
+    telemetry.addData("Power", intakeMotor.getPower());
+    telemetry.update();
 }
 ```
 
-### **❌ Not inverting joystick Y-axis**
+This works for two states. Add a third state, a "was I holding?" memory, or a second class that needs to know the intake's status — and it falls apart. That is the exact problem Part 3 solves.
+
+### **Step 2 — `IntakeSubsystem.java`**
 
 ```java
-// Pushing forward gives NEGATIVE values!
-double drive = -gamepad1.left_stick_y;  // Negate to make forward = positive
+package org.firstinspires.ftc.teamcode.Subsystems;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+public class IntakeSubsystem {
+
+    // The three modes this intake can be in.
+    // An enum keeps states explicit — no more magic numbers or stray booleans.
+    public enum IntakeState {
+        INTAKING,
+        HOLDING,   // slow reverse keeps the game piece from falling out
+        STOPPED
+    }
+
+    private final DcMotor motor;
+    private IntakeState state = IntakeState.STOPPED;
+
+    public IntakeSubsystem(HardwareMap hardwareMap) {
+        motor = hardwareMap.get(DcMotor.class, "intake");
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    // Methods describe robot intent, not hardware action
+    public void intake() { state = IntakeState.INTAKING; }
+    public void hold()   { state = IntakeState.HOLDING;  }
+    public void stop()   { state = IntakeState.STOPPED;  }
+
+    public IntakeState getState() { return state; }
+
+    // Call this once per loop to apply the current state to the hardware
+    public void update() {
+        switch (state) {
+            case INTAKING: motor.setPower(1.0);    break;
+            case HOLDING:  motor.setPower(-0.15);  break;
+            case STOPPED:
+            default:       motor.setPower(0);      break;
+        }
+    }
+
+    public void addTelemetry(Telemetry telemetry) {
+        telemetry.addData("Intake state", state);
+        telemetry.addData("Intake power", motor.getPower());
+    }
+}
 ```
 
----
+### **Step 3 — Using it in an OpMode**
 
-## **Practice Exercises**
+```java
+@TeleOp(name = "Intake Capstone")
+public class IntakeCapstone extends LinearOpMode {
 
-1. **Basic TeleOp:** Create a tank drive that uses both joysticks  
+    private IntakeSubsystem intake;
 
-2. **Add an Intake:** Add a motor controlled by the A and B buttons  
+    @Override
+    public void runOpMode() {
+        intake = new IntakeSubsystem(hardwareMap);
 
-3. **Add a Claw:** Add a servo controlled by X (open) and Y (close)  
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
 
-4. **Create a Toggle:** Make the claw toggle open/closed with one button  
+        waitForStart();
 
-5. **Simple Auto:** Drive forward, turn 90°, drive forward again  
+        while (opModeIsActive()) {
+            // Driver input sets the desired state
+            if (gamepad1.a) {
+                intake.intake();
+            } else if (gamepad1.b) {
+                intake.hold();
+            } else if (gamepad1.x) {
+                intake.stop();
+            }
 
-6. **Subsystem Practice:** Create an `Arm` subsystem class with `raise()`, `lower()`, and `stop()` methods
+            // update() applies whatever state was last set — even if no button is pressed now
+            intake.update();
+            intake.addTelemetry(telemetry);
+            telemetry.update();
+        }
+    }
+}
+```
+
+### **Try This**
+
+1. Add a fourth state: `SLOW_INTAKE` that runs the motor at 40% power. Bind it to `gamepad1.y`.
+2. Add a servo to the subsystem that opens a gate when `INTAKING` and closes it otherwise.
+3. Print a warning in telemetry if the motor power is non-zero but `getState()` returns `STOPPED` — that would indicate a bug.
 
 ---
 
@@ -525,13 +617,20 @@ Before moving on, you should be able to:
 
 ## **What's Next?**
 
-Once you're comfortable with these basics:
+The code you've written in this level works. It will also start to break down as your robot gets more complex — more mechanisms, more modes, more buttons. You've already seen a hint of this in the capstone: the inline if/else approach has limits.
 
-1. **Learn about encoders** — More precise autonomous movement  
-2. **Learn about sensors** — Color sensors, distance sensors, touch sensors  
-3. **Learn about roadrunner/pedropathing** — Advanced autonomous path following
+Level 3 is the direct answer. Here is how each Level 2 concept maps forward:
 
-And when you move to FRC in high school, you'll be ready for **Level 4: FRC Basics**, which shows you how these concepts translate to the Command-Based framework\!
+| Level 2 concept | Level 3 application |
+|---|---|
+| `if/else` on button presses | State machine: enum field + `update()` method replaces tangled conditionals |
+| Subsystem class with `intake()`, `stop()` | Subsystem with a `state` field — methods set state, `periodic()` applies it |
+| Multiple boolean flags tracking status | Single enum that makes illegal states impossible to represent |
+| Helper methods in an OpMode | Command-shaped methods on subsystem classes (preview of Level 4) |
+
+**Continue to Level 3: Advanced FTC Patterns** — state machines, subsystem architecture, and the patterns that keep competition code readable under pressure.
+
+When you eventually move to FRC, **Level 4: FRC Basics** will show you how everything you learned here translates directly into the Command-Based framework.
 
 ---
 
