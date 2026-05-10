@@ -514,7 +514,7 @@ You've learned subsystems, commands, requirements, default commands, and binding
 
 **The task:** A single-motor intake using a CTRE Talon FX (Kraken X60). A default command keeps it stopped when nothing is scheduled. A button-bound command runs it while the right trigger is held. The scheduler prevents conflicts automatically.
 
-> A deployable Gradle project for this capstone is planned for the companion repo (Phase 8).
+> **Full project:** [`companion/level-4/CommandIntake`](https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-4/CommandIntake)
 
 ### **`Constants.java`**
 

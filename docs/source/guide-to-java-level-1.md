@@ -628,6 +628,8 @@ team3603.printReport();
 2. Add algae tracking: processor scores 6 pts each, net scores 4 pts each. Add `recordAlgae(int processor, int net)`.
 3. Create two `MatchScorer` objects for two different teams, score them, then print which team won.
 
+> **Full project:** [`companion/level-1/MatchScorer`](https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-1/MatchScorer)
+
 ---
 
 ## **Learning Resources**

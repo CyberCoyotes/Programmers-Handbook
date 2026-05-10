@@ -597,6 +597,8 @@ public class IntakeCapstone extends LinearOpMode {
 2. Add a servo to the subsystem that opens a gate when `INTAKING` and closes it otherwise.
 3. Print a warning in telemetry if the motor power is non-zero but `getState()` returns `STOPPED` — that would indicate a bug.
 
+> **Full project:** [`companion/level-2/IntakeSubsystem`](https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-2/IntakeSubsystem)
+
 ---
 
 ## **Check Your Understanding**

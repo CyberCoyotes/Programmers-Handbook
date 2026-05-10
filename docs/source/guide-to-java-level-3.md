@@ -993,6 +993,8 @@ public class CoordinatedTeleOp extends LinearOpMode {
 2. Replace the simplified arm `update()` with real encoder-based position control using `DcMotorEx.setTargetPosition()`.
 3. Convert `hold()` from a manual driver input into an automatic sensor transition: when a beam-break sensor detects a game piece, `INTAKING` automatically transitions to `HOLDING`.
 
+> **Full project:** [`companion/level-3/CoordinatedRobot`](https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-3/CoordinatedRobot)
+
 ---
 
 ## **Check Your Understanding**
