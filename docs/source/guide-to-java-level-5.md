@@ -10,24 +10,14 @@ FRC students who understand the basics of Command-Based and want to level up. Th
 
 ## **Your Learning Path**
 
-```java
-┌─────────────────────────────────────────────────────────────┐
-│                LEVEL 4: FRC Basics                          │
-│              (Subsystems, Commands, Bindings)               │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│              LEVEL 5: Advanced FRC Patterns                 │
-│                      (You are here)                         │
-│                                                             │
-│  Part 1: Command Compositions                               │
-│  Part 2: Advanced Triggers                                  │
-│  Part 3: State Machines                                     │
-│  Part 4: Lambdas and Method References                      │
-│  Part 5: Enums with Data                                    │
-│  Part 6: Autonomous Patterns                                │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["LEVEL 4: FRC Basics<br/>(Subsystems, Commands, Bindings)"]
+    B["LEVEL 5: Advanced FRC Patterns<br/>(You are here)"]
+    C["LEVEL 6: Vision & Field-Relative<br/>(AprilTag pose, odometry fusion)"]
+
+    A --> B
+    B --> C
 ```
 
 ## **Part 1: Command Compositions**
@@ -473,6 +463,10 @@ Commands.sequence(
 // Just need to know one thing
 public boolean hasPiece() { return beamBreak.get(); }
 ```
+
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Students over-apply state machines coming out of Level 3.** If a command runs a motor for 0.5 s and stops, that is a command — not a state machine. Reserve state machines for mechanisms that have persistent mode: an elevator that needs to know which position it is currently targeting, an intake that distinguishes INTAKING from HOLDING. If the state changes only in response to commands and never from sensors, a command is sufficient. The cost of an unnecessary state machine is a periodic() method that fights the scheduler.
 
 ### **State Machine in a Subsystem**
 
@@ -927,6 +921,324 @@ public Command getAutonomousCommand() {
 }
 ```
 
+!!! note "Coach"
+    <!-- category: real-robot demo opportunity -->
+    **Walk through a full auto routine on the whiteboard before writing a line of code.** List every action in order, then identify which ones can run in parallel ("elevator raises while driving"). Students who plan in English first make far fewer composition mistakes. After the whiteboard session, the code nearly writes itself — each bullet becomes a command, each "while" becomes `Commands.parallel` or `Commands.deadline`.
+
+## **Part 7: Motion Profiling and Feedforward**
+
+Open-loop power commands (just `motor.set(0.5)`) work for simple mechanisms. For an elevator, they don't — gravity pulls it down at different rates depending on position, and slamming to a target at full speed damages hardware. Motion profiling shapes the velocity over time; feedforward estimates the voltage needed to follow that profile.
+
+### **Why You Need Both**
+
+| Problem | What fixes it |
+|---|---|
+| Elevator overshoots the target | TrapezoidProfile (limits velocity and acceleration) |
+| Elevator drifts down under gravity | ElevatorFeedforward (kG term adds voltage to oppose gravity) |
+| Elevator is slow to respond | ElevatorFeedforward (kV term adds voltage proportional to desired velocity) |
+
+### **Elevator Positions as an Enum**
+
+```java
+public enum ElevatorPosition {
+    STOWED(0.00),   // fully retracted
+    INTAKE(0.20),   // at game-piece pickup height
+    L1    (0.40),
+    L2    (0.65),
+    L3    (0.90),
+    L4    (1.20);   // meters from zero
+
+    public final double heightMeters;
+    ElevatorPosition(double h) { heightMeters = h; }
+}
+```
+
+### **Profiled Elevator Subsystem**
+
+```java
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.hardware.TalonFX;
+import edu.wpi.first.math.controller.ElevatorFeedforward;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import static frc.robot.Constants.ElevatorConstants.*;
+
+public class ElevatorSubsystem extends SubsystemBase {
+
+    private final TalonFX motor = new TalonFX(MOTOR_ID);
+
+    // kS: static friction (V), kG: gravity compensation (V),
+    // kV: velocity gain (V·s/m), kA: acceleration gain (V·s²/m)
+    private final ElevatorFeedforward feedforward =
+        new ElevatorFeedforward(kS, kG, kV, kA);
+
+    private final TrapezoidProfile.Constraints constraints =
+        new TrapezoidProfile.Constraints(MAX_VEL_MPS, MAX_ACCEL_MPS2);
+
+    // Current profiled setpoint and goal
+    private TrapezoidProfile.State setpoint = new TrapezoidProfile.State();
+    private TrapezoidProfile.State goal     = new TrapezoidProfile.State();
+
+    public void goTo(ElevatorPosition position) {
+        goal = new TrapezoidProfile.State(position.heightMeters, 0);
+    }
+
+    public boolean isAtTarget() {
+        double error = Math.abs(getHeightMeters() - goal.position);
+        return error < TOLERANCE_METERS;
+    }
+
+    public double getHeightMeters() {
+        // Convert motor rotations → meters using the sprocket pitch
+        return motor.getPosition().getValueAsDouble() * METERS_PER_ROTATION;
+    }
+
+    @Override
+    public void periodic() {
+        // Advance the profile by one 20 ms robot loop
+        setpoint = new TrapezoidProfile(constraints).calculate(0.020, setpoint, goal);
+
+        double ffVolts = feedforward.calculate(setpoint.velocity);
+        // Phoenix 6: PositionVoltage uses onboard PID + arbitrary feed-forward
+        motor.setControl(
+            new PositionVoltage(setpoint.position / METERS_PER_ROTATION)
+                .withFeedForward(ffVolts)
+        );
+    }
+}
+```
+
+!!! note "Coach"
+    <!-- category: real-robot demo opportunity -->
+    **Tune kG before anything else.** Set kS, kV, kA all to zero. Slowly raise kG until the elevator holds position with zero command input. If the elevator drifts down, kG is too low; if it creeps up, too high. Only after kG is correct does tuning kV make sense. Run this tuning exercise live on the robot — students remember empirical results far better than formulas.
+
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **FTC equivalent.** Current FTC SDK does not include `TrapezoidProfile` or `ElevatorFeedforward`. Teams approximate with a position PID on a `DcMotorEx` and hand-tuned power curves. After FTC/FRC convergence, WPILib's profiling and feedforward classes will be available in FTC. The elevator enum pattern above works identically in both ecosystems once the hardware layer is in place.
+
+---
+
+## **Part 8: Choreo Trajectory Authoring**
+
+Choreo is a desktop application for designing robot paths. It exports a `.traj` file that your robot code loads and follows. Unlike hand-coded waypoints, Choreo generates time-parameterized trajectories that respect your robot's kinematic constraints.
+
+### **Workflow: Design → Export → Deploy → Follow**
+
+**Step 1 — Design in the Choreo app**
+
+1. Open Choreo, create a new project, select your field image.
+2. Add waypoints by clicking on the field. Each waypoint has position (x, y) and heading.
+3. Add constraints: maximum velocity, maximum acceleration, stopped at start/end.
+4. Click **Generate**. Choreo solves the optimal trajectory.
+
+**Step 2 — Version the `.traj` file**
+
+Choreo exports to `deploy/choreo/<name>.traj`. This directory is deployed to the roboRIO by WPILib's Gradle build.
+
+```
+src/
+└── main/
+    └── deploy/
+        └── choreo/
+            ├── ScoreToFirstPiece.traj    ← commit these!
+            └── FirstPieceToScore.traj
+```
+
+!!! note "Coach"
+    <!-- category: hardware-specific gotcha -->
+    **Commit the `.traj` files.** They are generated, but they are also configuration — they define the path the robot takes. A path that differs between your development machine and the robot is a match-day debugging nightmare. Add `deploy/choreo/` to the repo and treat `.traj` files with the same discipline as `Constants.java`.
+
+**Step 3 — Load and follow in code**
+
+Add the ChoreoLib vendor dependency (vendordep URL from the Choreo docs), then:
+
+```java
+import choreo.Choreo;
+import choreo.trajectory.SwerveSample;
+import edu.wpi.first.wpilibj2.command.Command;
+
+public final class AutonomousCommands {
+
+    private AutonomousCommands() {}
+
+    public static Command followPath(DrivetrainSubsystem drivetrain, String trajName) {
+        var traj = Choreo.loadTrajectory(trajName);
+
+        return drivetrain
+            // Reset odometry to the trajectory's starting pose
+            .runOnce(() -> drivetrain.resetOdometry(traj.getInitialPose()))
+            .andThen(
+                Choreo.choreoSwerveCommand(
+                    traj,
+                    drivetrain::getPose,             // current pose from odometry
+                    drivetrain.getChoreoController(),// built-in feedback controller
+                    drivetrain::driveRobotRelative,  // chassis speeds → module states
+                    () -> DriverStation.getAlliance()
+                             .orElse(Alliance.Blue) == Alliance.Red,
+                    drivetrain
+                )
+            );
+    }
+}
+```
+
+**Using it in auto:**
+
+```java
+Commands.sequence(
+    AutonomousCommands.followPath(drivetrain, "ScoreToFirstPiece"),
+    IntakeCommands.run(intake).until(intake::hasPiece).withTimeout(2.0),
+    AutonomousCommands.followPath(drivetrain, "FirstPieceToScore")
+)
+```
+
+---
+
+## **Part 9: Odometry and the Path-Following Feedback Loop**
+
+A trajectory describes where the robot *should* be at each point in time. Odometry tracks where it *actually* is. The trajectory follower compares the two and computes velocity corrections.
+
+### **How Swerve Odometry Works**
+
+```java
+// In the drivetrain subsystem
+private final SwerveDriveOdometry odometry = new SwerveDriveOdometry(
+    kinematics,             // geometry of the four swerve modules
+    getGyroAngle(),         // current heading from Pigeon 2
+    getModulePositions(),   // each module's distance and angle
+    new Pose2d()            // starting pose (will be reset before auto)
+);
+
+@Override
+public void periodic() {
+    // Update every 20 ms using fresh encoder and gyro data
+    odometry.update(getGyroAngle(), getModulePositions());
+
+    // Publish to SmartDashboard / AdvantageScope field widget
+    field2d.setRobotPose(getPose());
+    SmartDashboard.putData("Field", field2d);
+}
+
+public Pose2d getPose() { return odometry.getPoseMeters(); }
+
+public void resetOdometry(Pose2d pose) {
+    odometry.resetPosition(getGyroAngle(), getModulePositions(), pose);
+}
+```
+
+### **The Feedback Loop**
+
+```
+Trajectory (desired pose at time t)
+         │
+         ▼
+  [ Choreo PID Controller ]  ←── current pose (from odometry)
+         │
+         ▼
+  Chassis speed corrections
+         │
+         ▼
+  Swerve module targets (velocity + angle)
+         │
+         ▼
+  Pigeon 2 + module encoders → odometry update
+         │ (feeds back to top)
+```
+
+### **Why Odometry Drifts (and What to Do About It)**
+
+Wheel odometry accumulates error over time from wheel slip, encoder noise, and gyro drift. For short autos (< 5 m), drift is usually acceptable. For longer or more precise routines, Level 6 adds AprilTag pose corrections that periodically reset the odometry estimate using vision.
+
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **FTC odometry.** FTC teams use dead-wheel pods (e.g., goBilda Pinpoint) or the built-in IMU for pose tracking. The concept — integrating motion over time to estimate position — is identical. The WPILib class names (`SwerveDriveOdometry`, `Pose2d`, `Rotation2d`) will be available in the converged ecosystem. If you've used Road Runner or Pedro Pathing in FTC, the trajectory-follower relationship you know from those tools is the same relationship described here.
+
+---
+
+## **Part 10: Fault Handling and Fallback States**
+
+A mechanism that silently uses stale or nonsense sensor data is more dangerous than one that stops. Build explicit fault detection and fallback behavior into every mechanism that uses sensors for closed-loop control.
+
+### **Detecting Encoder Faults (Phoenix 6)**
+
+```java
+private boolean encoderFault = false;
+private double lastPositionRot = 0;
+
+@Override
+public void periodic() {
+    var positionSignal = motor.getPosition();
+
+    // Phoenix 6 signals expose their CAN status
+    if (positionSignal.getStatus().isError()) {
+        encoderFault = true;
+        DriverStation.reportWarning("Elevator: CAN timeout on position signal", false);
+    }
+
+    double positionRot = positionSignal.getValueAsDouble();
+
+    // A jump of more than 10 rotations in one 20 ms loop is physically impossible
+    if (Math.abs(positionRot - lastPositionRot) > 10.0) {
+        encoderFault = true;
+        DriverStation.reportWarning("Elevator: encoder position jump detected", false);
+    }
+    lastPositionRot = positionRot;
+
+    if (encoderFault) {
+        runFallback();
+    } else {
+        runNormal();
+    }
+}
+```
+
+### **Fallback: Safe Open-Loop Behavior**
+
+```java
+private void runFallback() {
+    // Time-based, operator-commanded movement only.
+    // No position control — no risk of driving into hard stops.
+    motor.setControl(new DutyCycleOut(fallbackPower));
+    SmartDashboard.putBoolean("Elevator/Fault", true);
+}
+```
+
+### **Fallback: Limit-Switch Floor**
+
+```java
+// If a lower limit switch is available, use it to confirm home position
+// even when the encoder is unreliable
+if (lowerLimitSwitch.get()) {
+    // We know we're at zero — safe to reset encoder and re-enable closed-loop
+    motor.setPosition(0);
+    encoderFault = false;
+}
+```
+
+### **CAN Device Dropout**
+
+```java
+public boolean isHealthy() {
+    // Phoenix 6: signal status becomes ERROR if device stops responding
+    return !motor.getPosition().getStatus().isError() && !encoderFault;
+}
+
+// In auto: cancel the routine if a critical subsystem goes unhealthy
+Commands.sequence(
+    liftArm,
+    Commands.waitUntil(elevator::isAtTarget)
+        .withTimeout(3.0),
+    eject
+).unless(() -> !elevator.isHealthy())
+```
+
+!!! note "Coach"
+    <!-- category: let them fail here -->
+    **Failing safe beats failing open.** The instinct when an encoder glitches is to keep running with the last known position. That instinct is wrong — it drives mechanisms into hard stops at full speed. At a practice match, let a student see what happens when you command position on bad encoder data. Then build the fault check together. The lesson is permanent.
+
+---
+
 ## **Debugging Patterns**
 
 ### **Logging State Changes**
@@ -975,57 +1287,111 @@ States are strings—easy to plot over time. Look for:
 - States that should happen but don't  
 - Rapid oscillation between states (usually a bug\!)
 
-## **Practice Exercises**
+## **Capstone: Elevator + Intake Autonomous Routine**
 
-### **Triggers Practice**
+Combine everything from this level: profiled elevator with 6 positions, a coordinated intake, and a sequential autonomous routine that follows two Choreo paths.
 
-1. **Basic bindings:** Set up these controls:
+**What it demonstrates:**
+- Profiled elevator (Part 7) used as a subsystem with position enum
+- Choreo path following (Part 8) as named commands
+- `Commands.parallel` for driving + staging simultaneously
+- Fault guard (Part 10) — auto aborts if elevator goes unhealthy
 
-   - Right trigger: run intake while held  
-   - Left trigger: reverse intake while held  
-   - A button: shoot once (on press)  
-   - B button: stop everything
-
-2. **Sensor trigger:** Create a trigger that:
-
-   - Turns LEDs green when piece is detected  
-   - Turns LEDs off when piece is lost  
-   - Vibrates controller briefly on detection
-
-3. **Combined trigger:** Create a "ready to shoot" trigger that requires:
-
-   - Shooter at speed  
-   - Arm at target  
-   - Target visible
-
-   Bind it to set LEDs green when all conditions met.
-
-4. **Two-stage action:** Make the A button:
-
-   - While held: spin up shooter  
-   - On release: feed piece (only if shooter is at speed)
-
-### **State Machine Practice**
-
-1. **Identify the need:** Look at this code and identify why it might benefit from a state machine:
+### **`ElevatorCommands.java`**
 
 ```java
-private boolean isExtending = false;
-private boolean isRetracted = true;
-private boolean atTop = false;
-private boolean safeToMove = true;
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem.ElevatorPosition;
+
+public final class ElevatorCommands {
+
+    private ElevatorCommands() {}
+
+    public static Command goTo(ElevatorSubsystem elevator, ElevatorPosition target) {
+        return Commands.sequence(
+            Commands.runOnce(() -> elevator.goTo(target), elevator),
+            Commands.waitUntil(elevator::isAtTarget)
+        ).withName("Elevator→" + target.name());
+    }
+
+    public static Command idle(ElevatorSubsystem elevator) {
+        return Commands.run(() -> {}, elevator).withName("ElevatorIdle");
+    }
+}
 ```
 
-2. **Design a state machine:** Draw a state diagram for a climber that:
+### **`AutonomousRoutines.java`**
 
-   - Starts retracted  
-   - Can extend when match is late enough  
-   - Can retract once extended  
-   - Should stop at limit switches
+```java
+package frc.robot.commands;
 
-3. **Implement it:** Write the enum, the periodic() method, and the request methods.
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem.ElevatorPosition;
+import frc.robot.subsystems.IntakeSubsystem;
 
-4. **Write commands:** Write factory methods for extending and retracting the climber.
+public final class AutonomousRoutines {
+
+    private AutonomousRoutines() {}
+
+    /**
+     * Score preload at L4, drive to first game piece while lowering to intake height,
+     * grab the piece, then drive back and score at L2.
+     *
+     * Aborts cleanly if the elevator reports a fault.
+     */
+    public static Command scoreTwoPiece(
+        DrivetrainSubsystem drivetrain,
+        ElevatorSubsystem   elevator,
+        IntakeSubsystem     intake
+    ) {
+        return Commands.sequence(
+            // 1. Score preload at L4
+            ElevatorCommands.goTo(elevator, ElevatorPosition.L4),
+            IntakeCommands.eject(intake).withTimeout(0.5),
+
+            // 2. Drive to first piece while lowering elevator — run in parallel
+            Commands.parallel(
+                AutonomousCommands.followPath(drivetrain, "ScoreToFirstPiece"),
+                ElevatorCommands.goTo(elevator, ElevatorPosition.INTAKE)
+            ),
+
+            // 3. Grab the piece — sensor-gated with a timeout safety net
+            IntakeCommands.run(intake)
+                .until(intake::hasPiece)
+                .withTimeout(2.0),
+
+            // 4. Drive back and stage elevator simultaneously
+            Commands.parallel(
+                AutonomousCommands.followPath(drivetrain, "FirstPieceToScore"),
+                ElevatorCommands.goTo(elevator, ElevatorPosition.L2)
+            ),
+
+            // 5. Score
+            Commands.waitUntil(elevator::isAtTarget),
+            IntakeCommands.eject(intake).withTimeout(0.5),
+
+            // 6. Return elevator to stowed
+            ElevatorCommands.goTo(elevator, ElevatorPosition.STOWED)
+
+        ).unless(() -> !elevator.isHealthy());  // abort if elevator has a fault
+    }
+}
+```
+
+### **Try This**
+
+1. Add a third path: after scoring L2, follow a path to a second piece and score it at L3.
+2. Replace `.withTimeout(2.0)` on the intake command with a sensor trigger — schedule `ElevatorCommands.goTo(STOWED)` automatically the moment `intake.hasPiece()` becomes true.
+3. Add a `SendableChooser` in `RobotContainer` that lets you pick between scoring L4+L2 (this routine) and a simpler L1-only routine for qualification matches where you just need to leave the zone.
+
+---
 
 ## **Common Patterns Summary**
 
@@ -1107,17 +1473,14 @@ driver.leftBumper().whileTrue(
 
 ## **What's Next?**
 
-You now have the tools to write competition-quality FRC code. Continue learning by:
+Level 5 gives you full control of a competition robot — mechanisms, compositions, autonomous paths. Level 6 adds the capability that separates good autonomous routines from great ones: the robot knows where it is on the field in 3D, and it uses that information to correct its path in real time.
 
-1. **Practice** — Build increasingly complex command compositions  
-2. **Read team code** — Study how elite teams structure their code  
-3. **Experiment** — Try different patterns, see what works  
-4. **Teach** — Explaining to teammates solidifies your understanding
+| Level 5 concept | Level 6 extension |
+|---|---|
+| Choreo path following | Vision-corrected path following — AprilTag pose estimates periodically reset odometry so the robot recovers from drift mid-path |
+| Wheel odometry alone | `SwerveDrivePoseEstimator` fuses odometry with vision; each vision update is weighted by its uncertainty |
+| Elevator fault detection | Vision dropout handling — graceful degradation when the tag disappears mid-routine |
+| Field-relative auto commands | Field-relative scoring: "drive to the nearest reef branch" without a fixed path |
 
-Check out these team repositories for inspiration:
-
-- 254 (The Cheesy Poofs)  
-- 6328 (Mechanical Advantage)  
-- 1678 (Citrus Circuits)  
-- 2056 (OP Robotics)
+**Continue to Level 6: Vision and Field-Relative Programming** — Limelight 4, MegaTag pose, odometry fusion, and the commands that make the robot score without hardcoded positions.
 
