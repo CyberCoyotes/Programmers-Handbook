@@ -8,25 +8,19 @@ High school FRC students transitioning from FTC, or students with Java basics wh
 
 ## **Your Learning Path**
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│            LEVEL 1: Java Foundations                        │
-│            LEVEL 2: Java for FTC (if applicable)            │
-│            LEVEL 3: Advanced FTC Patterns (if applicable)   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                LEVEL 4: FRC Basics                          │
-│                    (You are here)                           │
-│         Transition from FTC → FRC Command-Based             │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    LEVEL 5: Advanced FRC                    │
-│     Commands Deep Dive • Triggers • State Machines          │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["LEVEL 1: Java Foundations"]
+    B["LEVEL 2: Java for FTC (if applicable)"]
+    C["LEVEL 3: Advanced FTC Patterns (if applicable)"]
+    D["LEVEL 4: FRC Basics<br/>(You are here)<br/>Transition from FTC → Command-Based"]
+    E["LEVEL 5: Advanced FRC<br/>Commands Deep Dive • Triggers • State Machines"]
+
+    A --> D
+    A --> B
+    B --> C
+    C --> D
+    D --> E
 ```
 
 ## **The Big Shift: Iterative → Command-Based**
@@ -67,12 +61,15 @@ This feels weird at first, but it's powerful:
 | `LinearOpMode` | `Robot.java` \+ `RobotContainer.java` | Split into framework and your code |
 | `opModeIsActive()` loop | Command Scheduler | Framework runs the loop for you |
 | `hardwareMap.get()` | Constructor injection | Motors created in subsystem constructors |
-| `gamepad1.a` | `controller.a()` | Returns a Trigger, not a boolean |
+| `gamepad1.a` (boolean) | `controller.a()` (Trigger) | Not `true`/`false` — a `Trigger` is a composable object: chain `.onTrue()`, `.whileTrue()`, `.and()`, `.negate()`, `.debounce()` directly onto it |
 | `motor.setPower()` | Same, but inside subsystems | Hardware stays private to subsystem |
 | Subsystem class with `update()` | `SubsystemBase` with `periodic()` | Very similar pattern\! |
 | State machine enum | Same pattern works\! | Commands can also manage state |
 | `sleep()` in auto | `Commands.waitSeconds()` | Non-blocking, composable |
 | Time-based auto | Path following (Choreo) | Much more precise |
+| — | `addRequirements(subsystem)` | Registers ownership so the scheduler can prevent two commands from fighting over one motor; forgetting this is the subtlest transition bug |
+| Multiple objects from one FTC class | One singleton per subsystem | Create once in `RobotContainer`, pass references everywhere; a second `TalonFX` with the same CAN ID corrupts both |
+| — | `setDefaultCommand(cmd)` | Runs whenever nothing else is scheduled for that subsystem; always set one so motors never float in an unknown state |
 
 ## **Project Structure: Where Things Live**
 
@@ -180,7 +177,15 @@ public class Intake extends SubsystemBase {
 1. `extends SubsystemBase` — Integrates with Command Scheduler  
 2. No `HardwareMap` — Motor IDs come from Constants  
 3. `periodic()` instead of `update()` — Called automatically by framework  
-4. `TalonFX` instead of `DcMotor` — Different hardware library (CTRE Phoenix)
+4. `TalonFX` instead of `DcMotor` — Different hardware library (CTRE Phoenix 6)
+
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **Phoenix 6 API vs. Phoenix 5.** The Quick Reference uses `motor.set(speed)`, which is a Phoenix 5 compatibility shim that still works in Phoenix 6. Production code should use Phoenix 6's control request API: `motor.setControl(new DutyCycleOut(speed))`. The control request object is reusable — create it once as a field and call `.withOutput(speed)` each loop. Phoenix Tuner X (the CAN configuration tool) is also different from the Phoenix 5 Tuner — if you're setting CAN IDs or checking firmware, use Tuner X.
+
+!!! note "Coach"
+    <!-- category: hardware-specific gotcha -->
+    **`hardwareMap` muscle memory is real.** FTC graduates instinctively look for `hardwareMap.get()` when they need hardware. In FRC, motors are constructed directly in the subsystem using a CAN ID integer from `Constants`. The first session on a new robot, have students open `Constants.java` first and verify every CAN ID against Phoenix Tuner X before writing any subsystem code — it prevents 45-minute debugging sessions over a wrong ID. Also: each subsystem is created exactly once in `RobotContainer` and passed wherever it is needed. Creating a second `IntakeSubsystem` instance creates a second `TalonFX` object with the same CAN ID, and both will fight for motor control.
 
 ## **Commands: The New Concept**
 
@@ -254,6 +259,10 @@ operator.rightTrigger().whileTrue(IntakeCommands.run(intake));
 operator.leftTrigger().whileTrue(IntakeCommands.reverse(intake));
 ```
 
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Forgetting requirements is the subtlest transition bug.** `Commands.run(() -> intake.run())` looks fine but doesn't tell the scheduler that the intake is in use. `Commands.run(() -> intake.run(), intake)` does. Without the requirement, two commands can both claim the intake simultaneously — one calling `run()` and one calling `stop()` on the same motor, every loop. The behavior is unpredictable and hard to debug. Teach students: the subsystem argument is never optional.
+
 ---
 
 ## **RobotContainer: Your New Home Base**
@@ -319,6 +328,10 @@ public class RobotContainer {
 | Button checks in `while` loop | `configureBindings()` method |
 | Default behavior in `else` | `setDefaultCommand()` |
 | Auto selection | `getAutonomousCommand()` |
+
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Do not check controller inputs in `periodic()`.** `periodic()` is called by the scheduler for sensor reads, logging, and state updates. Controller checks belong in `configureBindings()` in `RobotContainer`. Students who come from FTC's `while (opModeIsActive())` loop sometimes move button checks into `periodic()` because it "also runs in a loop" — it does, but there is no controller context there. If you see `controller.getAButton()` inside a subsystem, that is a design smell that needs fixing.
 
 ---
 
@@ -489,75 +502,138 @@ public class Intake extends SubsystemBase {
 
 The pattern is identical — `periodic()` instead of `update()`, but same idea.
 
+!!! note "Coach"
+    <!-- category: let them fail here -->
+    **`sleep()` in a command body stops the entire robot.** `Thread.sleep()` inside `execute()` or `initialize()` blocks the WPILib loop — the drivetrain stops responding, the scheduler stops running, the Driver Station may declare a communication timeout. Let students try it once on a practice robot so they feel the consequence. Then show them `Commands.sequence()` with `Commands.waitSeconds()` as the replacement. The composed version is also easier to read.
+
 ---
 
-## **Common Mistakes When Transitioning**
+## **Capstone: Command-Based Intake (CTRE Hardware)**
 
-### **❌ Checking buttons in periodic()**
+You've learned subsystems, commands, requirements, default commands, and bindings. Wire them all together into a complete, deployable program.
+
+**The task:** A single-motor intake using a CTRE Talon FX (Kraken X60). A default command keeps it stopped when nothing is scheduled. A button-bound command runs it while the right trigger is held. The scheduler prevents conflicts automatically.
+
+> A deployable Gradle project for this capstone is planned for the companion repo (Phase 8).
+
+### **`Constants.java`**
 
 ```java
-// BAD — Don't do this in FRC!
-@Override
-public void periodic() {
-    if (someButtonPressed) {  // Where does this come from?
-        motor.set(1.0);
+package frc.robot;
+
+public final class Constants {
+
+    public static final class IntakeConstants {
+        public static final int MOTOR_ID   = 1;      // verify CAN ID in Phoenix Tuner X
+        public static final double RUN_SPEED = 0.8;
+    }
+
+    public static final class OperatorConstants {
+        public static final int CONTROLLER_PORT = 0;
     }
 }
 ```
 
-```java
-// GOOD — Use commands and bindings
-// In RobotContainer:
-button.whileTrue(Commands.run(() -> intake.run(), intake));
-```
-
-### **❌ Creating multiple subsystem instances**
+### **`IntakeSubsystem.java`**
 
 ```java
-// BAD — Two Intake objects fighting over one motor!
-public class ShooterCommands {
-    private static Intake intake = new Intake();  // NO!
-}
-```
+package frc.robot.subsystems;
 
-```java
-// GOOD — One instance in RobotContainer, passed to commands
-public class ShooterCommands {
-    public static Command shoot(Shooter shooter, Intake intake) {
-        // Use the passed-in intake
+import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.hardware.TalonFX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import static frc.robot.Constants.IntakeConstants.*;
+
+public class IntakeSubsystem extends SubsystemBase {
+
+    private final TalonFX motor = new TalonFX(MOTOR_ID);
+
+    // Reuse one control request object — avoids allocating garbage every loop
+    private final DutyCycleOut dutyCycle = new DutyCycleOut(0);
+
+    public void run() {
+        motor.setControl(dutyCycle.withOutput(RUN_SPEED));
+    }
+
+    public void stop() {
+        motor.setControl(dutyCycle.withOutput(0));
+    }
+
+    @Override
+    public void periodic() {
+        // Log supply current so you can see stall events during testing
+        SmartDashboard.putNumber("Intake/CurrentAmps",
+            motor.getSupplyCurrent().getValueAsDouble());
     }
 }
 ```
 
-### **❌ Forgetting requirements**
+### **`IntakeCommands.java`**
 
 ```java
-// BAD — Scheduler doesn't know this uses intake
-Commands.run(() -> intake.run());
+package frc.robot.commands;
 
-// GOOD — Scheduler can prevent conflicts
-Commands.run(() -> intake.run(), intake);
-```
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.IntakeSubsystem;
 
-### **❌ Using sleep() in commands**
+public final class IntakeCommands {
 
-```java
-// BAD — Blocks the entire robot!
-public void execute() {
-    motor.set(1.0);
-    Thread.sleep(1000);  // NO!
-    motor.set(0);
+    private IntakeCommands() {}
+
+    // Runs the intake while active; third arg registers the requirement
+    public static Command run(IntakeSubsystem intake) {
+        return Commands.startEnd(
+            intake::run,
+            intake::stop,
+            intake
+        );
+    }
+
+    // Default command — motor stopped, requirement held so nothing else sneaks in
+    public static Command idle(IntakeSubsystem intake) {
+        return Commands.run(intake::stop, intake);
+    }
 }
 ```
 
+### **`RobotContainer.java`**
+
 ```java
-// GOOD — Use command composition
-Commands.sequence(
-    Commands.runOnce(() -> motor.set(1.0)),
-    Commands.waitSeconds(1.0),
-    Commands.runOnce(() -> motor.set(0))
-);
+package frc.robot;
+
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.IntakeCommands;
+import frc.robot.subsystems.IntakeSubsystem;
+
+public class RobotContainer {
+
+    // One instance — passed to everything that needs it
+    private final IntakeSubsystem intake = new IntakeSubsystem();
+
+    private final CommandXboxController operator =
+        new CommandXboxController(Constants.OperatorConstants.CONTROLLER_PORT);
+
+    public RobotContainer() {
+        // Default command: motor stopped whenever nothing else is scheduled
+        intake.setDefaultCommand(IntakeCommands.idle(intake));
+        configureBindings();
+    }
+
+    private void configureBindings() {
+        // Right trigger held → run; release → command ends → stop() called automatically
+        operator.rightTrigger().whileTrue(IntakeCommands.run(intake));
+    }
+}
 ```
+
+### **Try This**
+
+1. Add `IntakeCommands.reverse(intake)` (negative output) and bind it to `operator.leftTrigger()`.
+2. Watch the `Intake/CurrentAmps` value on SmartDashboard while running the intake. Stall the roller by hand — the current will spike. This is how you detect game-piece grabs without a sensor.
+3. Add a second subsystem (e.g., a `LEDSubsystem` using `AddressableLED`) and schedule a command that sets the LEDs green whenever the intake is running.
 
 ---
 
@@ -662,19 +738,16 @@ Notice how the FRC version:
 
 ## **What's Next?**
 
-Once you're comfortable with:
+The commands in this level each do one thing. Level 5 answers the question you'll almost immediately ask: **how do I make things happen in a sequence?**
 
-* Subsystems extending `SubsystemBase`  
-* Basic command factories  
-* Button bindings in RobotContainer  
-* Constants organization
+| Level 4 concept | Level 5 application |
+|---|---|
+| `Commands.startEnd(start, stop, subsystem)` — one action | `Commands.sequence(cmd1, cmd2, cmd3)` runs commands one after another; `Commands.parallel(cmd1, cmd2)` runs them at the same time |
+| One command per button binding | Complex `Trigger` conditions: `.and()`, `.or()`, `.negate()`, `.debounce()`, and custom triggers built from sensor values |
+| State field managed in a subsystem | State machine coordinated through command scheduling: the subsystem's enum drives which commands are valid to run |
+| No autonomous | Choreo trajectories as named commands, composed with scoring and intake commands into a full auto routine |
 
-Continue to **Level 5: Advanced FRC Patterns**:
-
-* Command compositions (sequence, parallel, race)  
-* Complex triggers and bindings  
-* State machines in Command-Based  
-* Autonomous routines
+**Continue to Level 5: Advanced FRC Patterns** — command compositions, autonomous sequences, and the multi-mechanism elevator that demonstrates everything together.
 
 ---
 
