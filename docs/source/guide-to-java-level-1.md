@@ -8,21 +8,16 @@ Any FIRST student — FTC or FRC — who needs to learn Java basics. No robot co
 
 ## **Your Learning Path**
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    LEVEL 1: Java Foundations                │
-│                    (You are here)                           │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-        ┌──────────────────┴─────────────────────┐
-        │                                        │
-        ▼                                        ▼
-┌───────────────┐                         ┌───────────────┐
-│   LEVEL 2     │                         │   LEVEL 4     │
-│ Java for FTC  │                         │  FRC Basics   │
-│ (Middle School)│                        │ (High School) │
-└───────────────┘                         └───────────────┘
+```mermaid
+flowchart TD
+
+    A["LEVEL 1: Java Foundations<br/>(You are here)"]
+
+    B["LEVEL 2<br/>Java for FTC<br/>(Middle School)"]
+    C["LEVEL 4<br/>FRC Basics<br/>(High School)"]
+
+    A --> B
+    A --> C
 ```
 
 ## **How to Use This Guide**
