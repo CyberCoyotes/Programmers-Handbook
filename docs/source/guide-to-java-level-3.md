@@ -12,21 +12,14 @@ FTC students who have the basics down and want to write cleaner, more reliable c
 
 ## **Your Learning Path**
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                 LEVEL 2: Java for FTC                       │
-│                    (Basic FTC skills)                       │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│              LEVEL 3: Advanced FTC Patterns                 │
-│                      (You are here)                         │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-              Ready for competition-quality code!
-                    (or Level 4 for FRC transition)
+```mermaid
+flowchart TD
+    A["LEVEL 2: Java for FTC<br/>(Basic FTC skills)"]
+    B["LEVEL 3: Advanced FTC Patterns<br/>(You are here)"]
+    C["LEVEL 4: FRC Basics<br/>(High School FRC transition)"]
+
+    A --> B
+    B --> C
 ```
 
 ---
@@ -216,6 +209,10 @@ public class StateMachineTeleOp extends LinearOpMode {
 | Hard to debug | Easy to see current state |
 | Hard to add features | Add a new state, done |
 
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Not everything needs a state machine.** If a button runs a motor forward while held and stops it when released, that is two states and a plain if/else is clearer and shorter. State machines earn their keep when you have three or more modes, automatic sensor-triggered transitions, or when multiple parts of the code need to ask "what is this mechanism currently doing?" Rule of thumb: if you can describe the full behavior in one sentence, an if/else is fine. If drawing the state diagram takes more than sixty seconds, reach for the enum.
+
 ### **State Diagram**
 
 Visualize your state machine before coding:
@@ -250,6 +247,10 @@ Visualize your state machine before coding:
 
 Draw this BEFORE you write code. It makes everything clearer.
 
+!!! note "Coach"
+    <!-- category: real-robot demo opportunity -->
+    **Do the diagram on the whiteboard with the team.** Draw the state circles, then ask students: "what makes us leave this state?" Let them answer — they usually know the robot's intended behavior better than they know how to express it in code. The session surfaces mismatches ("wait, can the arm move while we're intaking?") that would have been bugs. Five minutes at the board saves two hours of debugging. This is also a good check for completeness: every state needs at least one exit arrow, or the mechanism is permanently stuck.
+
 ---
 
 ## **Part 2: Organized Subsystems**
@@ -282,6 +283,10 @@ Robot
 ```
 
 Each becomes its own class:
+
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **The subsystem pattern is already forward-compatible.** The structure you are about to learn — private hardware fields, a constructor that takes `HardwareMap`, public action methods, an `update()` method called every loop — is exactly the WPILib subsystem pattern. Two things change when you reach Level 4: (1) you write `extends SubsystemBase` instead of a plain class, and (2) `update()` becomes `periodic()`, called automatically by the `CommandScheduler` instead of manually in your loop. Every other design decision transfers unchanged.
 
 ### **Example: Intake Subsystem with State Machine**
 
@@ -559,6 +564,10 @@ public class CleanTeleOp extends LinearOpMode {
 
 Look how clean that is\! Each subsystem manages itself. The OpMode just handles input and calls `update()`.
 
+??? info "Current FTC (2026)"
+    <!-- category: ecosystem convergence -->
+    **`update()` calls become `periodic()` in WPILib.** In current FTC, you call `intake.update()` and `arm.update()` explicitly at the end of each loop iteration. In FRC — and in the converging FTC ecosystem — one call to `CommandScheduler.getInstance().run()` inside `robotPeriodic()` calls `periodic()` on every registered subsystem and advances every scheduled command. The mental model shifts from "I drive every subsystem" to "I declare what I want; the scheduler drives it." The subsystem code itself barely changes.
+
 ---
 
 ## **Part 3: State-Based Autonomous**
@@ -782,6 +791,10 @@ private void coordinateSubsystems() {
 }
 ```
 
+!!! note "Coach"
+    <!-- category: let them fail here -->
+    **Let a team ship without coordination logic once.** Robots that move the arm while the intake is still running, or that try to score before the arm reaches position, reliably cost matches. Rather than preventing the mistake, let students build their first multi-mechanism robot without `coordinateSubsystems()`, run it at a scrimmage, watch what breaks, and then add the locking logic. The lesson lands permanently and they will never skip it on a future robot.
+
 ---
 
 ## **Part 5: Debugging State Machines**
@@ -826,17 +839,159 @@ private void setState(State newState) {
 
 ---
 
-## **Practice Exercises**
+## **Capstone: Intake + Arm Coordination**
 
-1. **Basic State Machine:** Create a state machine for a claw with states: OPEN, CLOSED, OPENING, CLOSING
+You've learned state machines, subsystem classes, and multi-subsystem coordination. Now build a robot that uses all three together.
 
-2. **Subsystem Class:** Convert your drivetrain into a subsystem class with `driveToPosition()` and `isAtTarget()` methods
+**The task:** Two subsystems — intake and arm — governed by coordination rules: the arm cannot move to SCORE while the intake is actively intaking (game piece not yet secured), and once the intake holds a piece, the arm moves to SCORE automatically.
 
-3. **Coordinated Action:** Make the arm automatically move to INTAKE position when the intake starts running
+This is the exact pattern that separates competition robots from practice robots.
 
-4. **State-Based Auto:** Convert a sleep-based auto to state-based auto
+### **`IntakeSubsystem.java`**
 
-5. **Draw First:** Before coding a new mechanism, draw the state diagram on paper
+```java
+package org.firstinspires.ftc.teamcode.subsystems;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+public class IntakeSubsystem {
+
+    public enum State { IDLE, INTAKING, HOLDING }
+
+    private final DcMotor motor;
+    private State state = State.IDLE;
+
+    public IntakeSubsystem(HardwareMap hardwareMap) {
+        motor = hardwareMap.get(DcMotor.class, "intake");
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public void startIntaking() { state = State.INTAKING; }
+    public void hold()          { state = State.HOLDING;  }
+    public void stop()          { state = State.IDLE;     }
+
+    public State getState()    { return state; }
+    public boolean isHolding() { return state == State.HOLDING; }
+
+    public void update() {
+        switch (state) {
+            case INTAKING: motor.setPower(1.0);   break;
+            case HOLDING:  motor.setPower(0.15);  break;  // gentle hold
+            case IDLE:
+            default:       motor.setPower(0);     break;
+        }
+    }
+}
+```
+
+### **`ArmSubsystem.java`**
+
+```java
+package org.firstinspires.ftc.teamcode.subsystems;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+public class ArmSubsystem {
+
+    public enum Position { STOWED, INTAKE, SCORE }
+
+    private final DcMotor motor;
+    private Position target = Position.STOWED;
+    private boolean locked = false;  // true when movement is blocked by coordination rules
+
+    public ArmSubsystem(HardwareMap hardwareMap) {
+        motor = hardwareMap.get(DcMotor.class, "arm");
+    }
+
+    // Requests a position change — silently ignored when locked
+    public void goTo(Position position) {
+        if (!locked) target = position;
+    }
+
+    public void setLocked(boolean locked) { this.locked = locked; }
+    public Position getTarget()           { return target; }
+    public boolean isLocked()             { return locked; }
+
+    public void update() {
+        // Simplified: a real robot would use encoder-based position control here
+        switch (target) {
+            case SCORE:  motor.setPower(-0.4); break;
+            case INTAKE: motor.setPower(0.4);  break;
+            case STOWED:
+            default:     motor.setPower(0);    break;
+        }
+    }
+}
+```
+
+### **`CoordinatedTeleOp.java`**
+
+```java
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import org.firstinspires.ftc.teamcode.subsystems.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
+
+@TeleOp(name = "Coordinated TeleOp")
+public class CoordinatedTeleOp extends LinearOpMode {
+
+    private IntakeSubsystem intake;
+    private ArmSubsystem arm;
+
+    @Override
+    public void runOpMode() {
+        intake = new IntakeSubsystem(hardwareMap);
+        arm    = new ArmSubsystem(hardwareMap);
+
+        telemetry.addData("Status", "Ready");
+        telemetry.update();
+        waitForStart();
+
+        while (opModeIsActive()) {
+            handleInput();
+            coordinateSubsystems();
+
+            intake.update();
+            arm.update();
+
+            telemetry.addData("Intake",     intake.getState());
+            telemetry.addData("Arm target", arm.getTarget());
+            telemetry.addData("Arm locked", arm.isLocked());
+            telemetry.update();
+        }
+    }
+
+    private void handleInput() {
+        if (gamepad1.a)            intake.startIntaking();
+        if (gamepad1.b)            intake.hold();
+        if (gamepad1.x)            intake.stop();
+
+        if (gamepad1.right_bumper) arm.goTo(ArmSubsystem.Position.SCORE);
+        if (gamepad1.left_bumper)  arm.goTo(ArmSubsystem.Position.INTAKE);
+        if (gamepad1.y)            arm.goTo(ArmSubsystem.Position.STOWED);
+    }
+
+    private void coordinateSubsystems() {
+        // Rule 1: arm cannot score while intake is still running (piece not secured yet)
+        arm.setLocked(intake.getState() == IntakeSubsystem.State.INTAKING);
+
+        // Rule 2: once the driver signals the piece is held, automatically stage for scoring
+        if (intake.isHolding()) {
+            arm.goTo(ArmSubsystem.Position.SCORE);
+        }
+    }
+}
+```
+
+### **Try This**
+
+1. Add a third subsystem — a `ClawSubsystem` with `open()` and `close()` — and add a rule: claw cannot close until the arm is at `SCORE` position.
+2. Replace the simplified arm `update()` with real encoder-based position control using `DcMotorEx.setTargetPosition()`.
+3. Convert `hold()` from a manual driver input into an automatic sensor transition: when a beam-break sensor detects a game piece, `INTAKING` automatically transitions to `HOLDING`.
 
 ---
 
@@ -948,12 +1103,14 @@ while (opModeIsActive()) {
 
 ## **What's Next?**
 
-You now have the tools to write competition-quality FTC code:
+You now have the tools to write competition-quality FTC code. When you transition to FRC, every pattern from this level maps directly onto the Command-Based framework — nothing gets thrown away.
 
-- State machines to manage complexity  
-- Subsystem classes to organize code  
-- State-based autonomous for reliability
+Here are the three concrete mappings:
 
-When you're ready for FRC, these patterns will translate directly — FRC's Command-Based framework is essentially a more sophisticated version of what you just learned\!
+| Level 3 concept | Level 4 equivalent | What changes |
+|---|---|---|
+| **State machine** (enum + switch in `update()`) | **Command** — each Command is a named state with `initialize()`, `execute()`, `isFinished()`, `end()` lifecycle methods | The state transitions that you wired in `coordinateSubsystems()` become `Trigger` conditions that schedule and cancel commands automatically |
+| **Subsystem class** (plain Java class, owns hardware, public action methods) | **`SubsystemBase`** subclass — identical structure, different base class | Add `extends SubsystemBase`; rename `update()` to `periodic()`; register in the constructor with `addRequirements()` |
+| **Manual `update()` calls** in the main loop | **`CommandScheduler.getInstance().run()`** in `robotPeriodic()` | One scheduler call replaces every individual `subsystem.update()` call; the scheduler calls `periodic()` on all registered subsystems and advances every active command |
 
-Continue to **Level 4: FRC Basics** when you join a high school team.
+Continue to **Level 4: FRC Basics** — the same robot you built here, rebuilt in Command-Based Java.
