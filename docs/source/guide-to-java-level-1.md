@@ -10,16 +10,18 @@ Any FIRST student — FTC or FRC — who needs to learn Java basics. No robot co
 
 ```mermaid
 flowchart TD
-
     A["LEVEL 1: Java Foundations<br/>(You are here)"]
-
-    B["LEVEL 2<br/>Java for FTC<br/>(Middle School)"]
-    C["LEVEL 3<br/>Java for FTC<br/>(Middle School)"]
-    D["LEVEL 4<br/>FRC Basics<br/>(High School)"]
+    B["LEVEL 2: Java for FTC<br/>Robot Programming Basics"]
+    C["LEVEL 3: Advanced FTC Patterns<br/>State Machines & Subsystems"]
+    D["LEVEL 4: FRC Basics<br/>FTC → Command-Based Transition"]
+    E["LEVEL 5: Advanced FRC<br/>Commands, Triggers, and Auto"]
+    F["LEVEL 6: Vision-Assisted Auto<br/>Localization & Sensor Fusion"]
 
     A --> B
     B --> C
-    A --> D
+    C --> D
+    D --> E
+    E --> F
 ```
 
 ## **How to Use This Guide**
