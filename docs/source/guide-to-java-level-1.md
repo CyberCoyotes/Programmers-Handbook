@@ -1,5 +1,12 @@
 # **Guide to Java \- Level 1: Foundations**
 
+# Test
+
+```mermaid
+flowchart TD
+    A --> B
+```
+
 ## **Who Is This For?**
 
 Any FIRST student — FTC or FRC — who needs to learn Java basics. No robot code here, just the fundamentals you'll need before touching any robot programming.  
