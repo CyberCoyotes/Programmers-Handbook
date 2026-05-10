@@ -32,6 +32,13 @@ The "official" version of the code. What actually runs on the robot.
 7. Code Review              →  Team checks your work
 8. Merge                    →  Your code joins main
 ```
+If you wanted to fold the team rule into the roadmap or a CONTRIBUTING.md for your handbook repo, the version I'd suggest:
+
+Branch hygiene
+
+Rebase your own branches onto main before opening a PR. Use git push --force-with-lease, never plain --force.
+Merge (don't rebase) any branch other people are working on with you.
+Squash-merge to main. Each PR becomes one commit on main.
 
 ## **Essential Git Commands**
 
