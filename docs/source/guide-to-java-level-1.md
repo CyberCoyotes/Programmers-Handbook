@@ -360,32 +360,32 @@ myDog.describe();    // Prints: Buddy is 3 years old.
 yourDog.describe();  // Prints: Max is 5 years old.
 ```
 
-### **A More Practical Example**
+### **A More Practical (and More Fun) Example**
 
 ```java
-public class BankAccount {
+public class KyberCrystalInventory {
     // Fields
     String ownerName;
     double balance;
     
     // Constructor
-    public BankAccount(String name, double startingBalance) {
+    public KyberCrystalInventory(String name, double startingCrystals) {
         ownerName = name;
-        balance = startingBalance;
+        balance = startingCrystals;
     }
     
     // Methods
-    public void deposit(double amount) {
+    public void findCrystals(double amount) {
         balance = balance + amount;
-        System.out.println("Deposited $" + amount);
+        System.out.println("Recovered " + amount + " kyber crystals.");
     }
     
-    public void withdraw(double amount) {
+    public void spendCrystals(double amount) {
         if (amount <= balance) {
             balance = balance - amount;
-            System.out.println("Withdrew $" + amount);
+            System.out.println("Spent " + amount + " kyber crystals.");
         } else {
-            System.out.println("Not enough money!");
+            System.out.println("Not enough kyber crystals!");
         }
     }
     
@@ -396,14 +396,14 @@ public class BankAccount {
 ```
 
 ```java
-// Using the BankAccount class
-BankAccount myAccount = new BankAccount("Alex", 100.0);
+// Using the KyberCrystalInventory class
+KyberCrystalInventory myInventory = new KyberCrystalInventory("Alex", 100.0);
 
-myAccount.deposit(50.0);     // Deposited $50.0
-myAccount.withdraw(30.0);    // Withdrew $30.0
-myAccount.withdraw(200.0);   // Not enough money!
+myInventory.findCrystals(50.0);    // Recovered 50.0 kyber crystals.
+myInventory.spendCrystals(30.0);   // Spent 30.0 kyber crystals.
+myInventory.spendCrystals(200.0);  // Not enough kyber crystals!
 
-System.out.println("Balance: $" + myAccount.getBalance());  // Balance: $120.0
+System.out.println("Kyber count: " + myInventory.getBalance());  // Kyber count: 120.0
 ```
 
 ### **Public vs Private**
@@ -773,8 +773,8 @@ Every concept in this level appears again in Level 2 — applied to a real robot
 | Variables (`int speed`, `boolean isRunning`) | Motor power values, sensor readings, subsystem state flags |
 | If/else | Deciding when to run a motor, when to stop, when to switch modes |
 | For/while loops | Waiting for an encoder target, polling a sensor until a condition is met |
-| Methods | Organizing robot actions: `extend()`, `stop()`, `driveForward()` |
-| Classes and objects | Each mechanism becomes its own class — intake, arm, drivetrain |
+| Methods | Organizing actions: `openSFoils()`, `stopThrusters()`, `jumpToLightspeed()` (or robot actions like `extend()`, `stop()`, `driveForward()`) |
+| Classes and objects | Each mechanism becomes its own class — intake, arm, drivetrain (or in Star Wars terms: hyperdrive, shields, astromech) |
 | Arrays | Storing encoder position targets, autonomous waypoint sequences |
 
 **FTC students:** Continue to **Level 2: Java for FTC** to write your first working robot program.
