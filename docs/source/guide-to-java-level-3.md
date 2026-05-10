@@ -568,6 +568,10 @@ Look how clean that is\! Each subsystem manages itself. The OpMode just handles 
     <!-- category: ecosystem convergence -->
     **`update()` calls become `periodic()` in WPILib.** In current FTC, you call `intake.update()` and `arm.update()` explicitly at the end of each loop iteration. In FRC — and in the converging FTC ecosystem — one call to `CommandScheduler.getInstance().run()` inside `robotPeriodic()` calls `periodic()` on every registered subsystem and advances every scheduled command. The mental model shifts from "I drive every subsystem" to "I declare what I want; the scheduler drives it." The subsystem code itself barely changes.
 
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Students put logic in the OpMode that belongs in the subsystem.** The tell is a method like `setPower(double)` on the subsystem paired with a big `if/else` block in the OpMode that decides what value to pass. Flip it: the subsystem exposes `intake()`, `hold()`, `stop()` — not `setPower()`. The OpMode sets *desired state*; the subsystem computes hardware output. When this pattern clicks, the OpMode shrinks to a handful of lines and the subsystem becomes independently readable and testable.
+
 ---
 
 ## **Part 3: State-Based Autonomous**
@@ -736,6 +740,10 @@ public class StateMachineAuto extends LinearOpMode {
 | No parallel actions | Multiple things at once |
 | Hard to debug | Clear current state |
 
+!!! note "Coach"
+    <!-- category: let them fail here -->
+    **Let them use sleep-based auto for one competition.** Time-based auto looks correct but the robot ends up in the wrong place because battery voltage and field conditions vary match to match. Resist warning them in advance. After the mismatch, ask: "what would you need to measure to make this reliable?" That question leads students to encoders, state machines, and sensor-gated transitions on their own — a lesson learned by watching the robot go the wrong way is remembered all season.
+
 ---
 
 ## **Part 4: Coordinating Multiple Subsystems**
@@ -836,6 +844,10 @@ private void setState(State newState) {
 | Rapidly switching states | No debouncing or condition too sensitive | Add stability check |
 | Wrong state after button press | Multiple states responding to same input | Check state guards |
 | Subsystem does nothing | Forgot to call `update()` | Add update() to main loop |
+
+!!! note "Coach"
+    <!-- category: real-robot demo opportunity -->
+    **Demo the "stuck state" bug live.** Write a state machine where the exit condition is `hasSample()` but the sensor cable is unplugged — the intake runs forever. Ask: "what does telemetry show? What does that tell you?" This exercise teaches both the debugging process (telemetry first, then hardware check) and why every long-running state should have a timeout fallback. Students remember it because the robot is sitting right there, misbehaving, while they figure it out.
 
 ---
 

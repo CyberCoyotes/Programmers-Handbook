@@ -406,6 +406,10 @@ public class BetterAuto extends LinearOpMode {
 }
 ```
 
+!!! note "Coach"
+    <!-- category: let them fail here -->
+    **Let them use time-based auto and watch it fail at a scrimmage.** At a practice event, battery voltage drops through the match, the field surface varies, and the robot ends up a tile off. Resist the urge to warn them beforehand. After the mismatch, ask: "what measurement would have helped?" That question gets students to encoders and state-based auto on their own. A lesson learned by watching the robot go the wrong way is remembered all season.
+
 ---
 
 ## **Part 6: Organizing Your Code**
@@ -471,6 +475,10 @@ public class OrganizedTeleOp extends LinearOpMode {
     }
 }
 ```
+
+!!! note "Coach"
+    <!-- category: real-robot demo opportunity -->
+    **Open two files side by side: the 200-line monolith and the refactored version.** Ask: "where do you look to change the intake speed?" In the monolith they have to search. In the subsystem class they go straight to `IntakeSubsystem.java`. That 30-second demo makes the case for organization better than any explanation — students who see it usually restructure their own code voluntarily.
 
 ---
 

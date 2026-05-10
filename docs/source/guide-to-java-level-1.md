@@ -530,6 +530,10 @@ double average = (double) sum / numbers.length;
 System.out.println("Average: " + average);  // Average: 5.0
 ```
 
+!!! warning "Coach: common pitfall"
+    <!-- category: common student misconception -->
+    **Off-by-one errors are the most common array bug.** Students reliably write `i <= arr.length` in the loop condition — `<=` causes an `ArrayIndexOutOfBoundsException` on the last pass because valid indices only go up to `arr.length - 1`. Rather than correcting this before it happens, let them write an array loop and hit the exception. Then ask: "what does the stack trace tell you about which line threw it?" Reading an exception message and connecting it back to an index is more valuable than never seeing one.
+
 ---
 
 ## **Capstone: `MatchScorer`**
