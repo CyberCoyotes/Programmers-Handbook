@@ -7,21 +7,15 @@ You can always start with the official [WPILib Documentation](https://docs.wpili
 1. #### **Basic Syntax**
 
    - Variables and data types
-
    - Control flow (if/else, loops)
-
    - Methods and parameters
-
    - Basic operators
 
 2. #### **Object-Oriented Programming**
 
    - Classes and objects
-
    - Inheritance
-
    - Encapsulation
-
    - Polymorphism
 
 3. #### **Common Data Structures**
