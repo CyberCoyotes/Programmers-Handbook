@@ -4,7 +4,8 @@
 
 High school FRC students transitioning from FTC, or students with Java basics who are new to FRC. This guide bridges what you already know into FRC's Command-Based framework.  
 **Prerequisites:** Java basics (Level 1\) and ideally FTC experience (Level 2/3)  
-**Time to Complete:** 1-2 weeks before build season
+**Time to Complete:** 1-2 weeks before build season  
+**Reference:** [Glossary](glossary.md)
 
 ## **Your Learning Path**
 
@@ -75,7 +76,7 @@ This feels weird at first, but it's powerful:
 
 ### **FTC Structure (What You Know)**
 
-```
+```text
 TeamCode/
 └── org/firstinspires/ftc/teamcode/
     ├── TeleOp/
@@ -85,7 +86,7 @@ TeamCode/
 
 ### **FRC Structure (What's New)**
 
-```
+```text
 src/main/java/frc/robot/
 ├── Robot.java              ← Framework entry point (don't touch much)
 ├── RobotContainer.java     ← YOUR MAIN FILE: create subsystems, bind buttons

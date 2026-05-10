@@ -38,6 +38,7 @@ nav:
     - Level 4: guide-to-java-level-4.md
     - Level 5: guide-to-java-level-5.md
     - Level 6: guide-to-java-level-6.md
+  - Glossary: glossary.md
 
 plugins:
   - search
