@@ -1,0 +1,26 @@
+name: Link Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build MkDocs site
+        run: |
+          pip install mkdocs-material
+          mkdocs build --strict
+
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --base site/
+            --include-fragments
+            --no-progress
+            'site/**/*.html'
+          fail: true

@@ -4,7 +4,7 @@
 
 FRC students who understand the basics of Command-Based and want to level up. This guide covers command compositions, advanced triggers, state machines, and patterns used by competitive teams.
 
-**Prerequisites:** Level 3: Java for FRC (comfortable with subsystems, basic commands, button bindings)
+**Prerequisites:** Level 4: FRC Basics (comfortable with subsystems, basic commands, button bindings)
 
 **Time to Complete:** Ongoing reference throughout the season
 
@@ -12,13 +12,13 @@ FRC students who understand the basics of Command-Based and want to level up. Th
 
 ```java
 ┌─────────────────────────────────────────────────────────────┐
-│                LEVEL 3: Java for FRC                        │
+│                LEVEL 4: FRC Basics                          │
 │              (Subsystems, Commands, Bindings)               │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│              LEVEL 4: Advanced FRC Patterns                 │
+│              LEVEL 5: Advanced FRC Patterns                 │
 │                      (You are here)                         │
 │                                                             │
 │  Part 1: Command Compositions                               │

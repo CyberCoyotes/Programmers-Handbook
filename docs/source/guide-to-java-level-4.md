@@ -3,7 +3,7 @@
 ## **Who Is This For?**
 
 High school FRC students transitioning from FTC, or students with Java basics who are new to FRC. This guide bridges what you already know into FRC's Command-Based framework.  
-**Prerequisites:** Java basics (Level 1\) and ideally FTC experience (Level 2/2.5)  
+**Prerequisites:** Java basics (Level 1\) and ideally FTC experience (Level 2/3)  
 **Time to Complete:** 1-2 weeks before build season
 
 ## **Your Learning Path**
@@ -12,19 +12,19 @@ High school FRC students transitioning from FTC, or students with Java basics wh
 ┌─────────────────────────────────────────────────────────────┐
 │            LEVEL 1: Java Foundations                        │
 │            LEVEL 2: Java for FTC (if applicable)            │
-│            LEVEL 2.5: Advanced FTC Patterns (if applicable) │
+│            LEVEL 3: Advanced FTC Patterns (if applicable)   │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                LEVEL 3: Java for FRC                        │
+│                LEVEL 4: FRC Basics                          │
 │                    (You are here)                           │
 │         Transition from FTC → FRC Command-Based             │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                    LEVEL 4: Advanced FRC                    │
+│                    LEVEL 5: Advanced FRC                    │
 │     Commands Deep Dive • Triggers • State Machines          │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -449,7 +449,7 @@ public static final int MOTOR_ID = 5;
 
 ## **Your FTC State Machines Still Work\!**
 
-If you learned state machines in Level 2.5, great news — they work the same way in FRC:
+If you learned state machines in Level 3, great news — they work the same way in FRC:
 
 ```java
 public class Intake extends SubsystemBase {
@@ -669,7 +669,7 @@ Once you're comfortable with:
 * Button bindings in RobotContainer  
 * Constants organization
 
-Continue to **Level 4: Advanced FRC Patterns**:
+Continue to **Level 5: Advanced FRC Patterns**:
 
 * Command compositions (sequence, parallel, race)  
 * Complex triggers and bindings  

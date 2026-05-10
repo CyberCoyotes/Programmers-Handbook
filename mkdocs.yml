@@ -30,12 +30,7 @@ theme:
         name: Switch to light mode
 
 nav:
-  - Home: introduction.md
-  # - Quick Links: quick-links-hub.md
-  # - Getting Started:
-  #  - Introduction: Introduction.md
-  #  - Software Setup: Software-Installation-Setup.md
-  #  - GitHub Workflow: GitHub-Workflow.md
+  - Home: index.md
   - Learn Java:
     - Level 1: guide-to-java-level-1.md
     - Level 2: guide-to-java-level-2.md
@@ -43,38 +38,6 @@ nav:
     - Level 4: guide-to-java-level-4.md
     - Level 5: guide-to-java-level-5.md
     - Level 6: guide-to-java-level-6.md
-  #- Controls:
-  #  - Introduction: controls/introduction.md
-  #  - Guide to Controls: controls/3603-guide-to-controls.md
-  #  - FAQ for Beginners: controls/FAQ-for-beginners.md
-  #  - CTRE: controls/ctre.md
-  #  - WPILib: controls/wpilib.md
-  #  - PathPlanner: controls/path-planner.md
-  #  - Autonomous PathPlanner: controls/auton-pathplanner.md
-  #  - Motion Profiling: controls/motion-profiling.md
-  #  - PID: controls/pid.md
-  #  - Limelight: controls/limelight.md
-  #  - PhotonVision: controls/photonvision.md
-  #  - PhotonVision on Limelight: controls/photonvision-on-a-limelight.md
-  #  - LEDs: controls/leds.md
-  #  - Limit Switches: controls/sensors-limit-switches.md
-  #  - Control an Arm: controls/control-an-arm.md
-  #  - Software Updates: controls/software-updates.md
-  #  - Style Guides: controls/style-guides.md
-  #  - Conventions: controls/conventions-style-guide.md
-  #  - Team History: controls/history-controls.md
-  #  - Programming Resources: controls/programming-resources.md
-  #  - Resources: controls/resources.md
-  #  - Where Am I: controls/whereami.md
-  #- Team:
-  #  - Team Build: team-build.md
-  #  - Team Business: team-business.md
-  #  - Controls Team: team-controls.md
-  #  - Organization: organization.md
-  #  - Community: community.md
-  #  - Calendar: calendar.md
-  #  - Events: events.md
-  #- Vendor Deps: vendordeps-list.md
 
 plugins:
   - search
