@@ -19,8 +19,8 @@ Any FIRST student — FTC or FRC — who needs to learn Java basics. No robot co
         │                                        │
         ▼                                        ▼
 ┌───────────────┐                         ┌───────────────┐
-│   LEVEL 2     │                         │   LEVEL 3     │
-│ Java for FTC  │                         │ Java for FRC  │
+│   LEVEL 2     │                         │   LEVEL 4     │
+│ Java for FTC  │                         │  FRC Basics   │
 │ (Middle School)│                        │ (High School) │
 └───────────────┘                         └───────────────┘
 ```
@@ -95,6 +95,10 @@ boolean opposite = !true;       // NOT: false (flips the value)
 int age = 15;
 boolean isTeenager = (age >= 13) && (age <= 19);  // true
 ```
+
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Integer division surprises everyone.** Ask students what `5 / 2` evaluates to. Most say `2.5`. Java gives `2` — integer division discards the decimal. To get `2.5`, at least one operand must be a `double`: write `5.0 / 2` or cast with `(double) 5 / 2`. Let students hit this on their own before explaining it; the surprise makes the rule stick far better than a warning does.
 
 ### **Printing Output**
 
@@ -208,6 +212,10 @@ while (count < 5) {
 * **For loop:** When you know how many times to repeat  
 * **While loop:** When you repeat until something changes
 
+!!! note "Coach"
+    <!-- category: let them fail here -->
+    **Let them write an infinite loop on purpose.** Have students write a while loop that counts up but forget to include the increment (`count = count + 1`). Let the program hang. Then show them Ctrl+C (or the IDE stop button) to recover. Making the program freeze once is worth more than ten warnings. After the experience, the rule — "always change the variable the condition depends on" — is obvious instead of arbitrary.
+
 ## **Part 3: Methods**
 
 Methods are reusable blocks of code. They help you organize and avoid repetition.
@@ -294,6 +302,10 @@ public void doStuff() { }
 public void thing() { }
 public int x() { }
 ```
+
+!!! note "Coach"
+    <!-- category: real-robot demo opportunity -->
+    **Naming habits compound.** The method names here (`startMotor()`, `calculateDistance()`, `isFinished()`) are exactly what students will write in Level 2 and beyond. Show students a snippet of real team code and ask them to read the method calls aloud: `intake.extend()`, `arm.goToScore()`, `drivetrain.stop()`. A subsystem whose method names read like match instructions is a well-designed subsystem. Start building that vocabulary now; it costs nothing and pays off for years.
 
 ## **Part 4: Classes and Objects**
 
@@ -434,6 +446,10 @@ public class Student {
 * Lets you add rules (like grade must be 0-100)  
 * Makes code easier to change later
 
+!!! note "Coach"
+    <!-- category: common student misconception -->
+    **Encapsulation is the idea, not just the syntax.** Students often think `private` is about security. The real point is **one class owns one thing**. A `Student` class owns grade data and enforces its own rules about it — nothing outside can corrupt it. In Level 4, this same principle appears as subsystems: a drivetrain subsystem owns its motors and nobody else touches them directly. Students who understand *why* private exists will write better subsystems without having to re-learn the concept.
+
 ## **Part 5: Arrays**
 
 Arrays store multiple values of the same type.
@@ -514,6 +530,108 @@ System.out.println("Max: " + max);  // Max: 9
 double average = (double) sum / numbers.length;
 System.out.println("Average: " + average);  // Average: 5.0
 ```
+
+---
+
+## **Capstone: `MatchScorer`**
+
+You've learned variables, control flow, methods, classes, and arrays. Now combine them into a complete program.
+
+**The task:** Write a `MatchScorer` class that tracks a robot's performance in one match and prints a score breakdown. No robot hardware — pure Java.
+
+**Concepts it uses:**
+
+- Private fields and a constructor (Part 4)
+- Constants instead of magic numbers (Part 1)
+- A method that loops through an array to compute a total (Parts 3 + 5)
+- A conditional return (Part 2)
+
+### **`MatchScorer.java`**
+
+```java
+public class MatchScorer {
+
+    // Point values for each reef level (teleop scoring, 2025 Reefscape rules).
+    // Keep constants together — when the game changes, there is exactly one place to update.
+    private static final int L1_POINTS = 2;
+    private static final int L2_POINTS = 3;
+    private static final int L3_POINTS = 4;
+    private static final int L4_POINTS = 5;
+    private static final int CLIMB_POINTS = 12;
+
+    private String teamName;
+    private int[] coralPerLevel;  // index 0 = Level 1 reef, index 3 = Level 4 reef
+    private boolean climbed;
+
+    // Constructor — one MatchScorer per team per match
+    public MatchScorer(String teamName) {
+        this.teamName = teamName;
+        coralPerLevel = new int[4];  // all zeros by default
+    }
+
+    // Record coral scored at a reef level (valid levels: 1–4)
+    public void recordCoral(int level, int count) {
+        if (level >= 1 && level <= 4) {
+            coralPerLevel[level - 1] += count;  // convert 1-based level to 0-based array index
+        }
+    }
+
+    public void setClimbed(boolean didClimb) {
+        climbed = didClimb;
+    }
+
+    // Loop through each level, multiply coral count by that level's point value, sum them up
+    public int coralScore() {
+        int[] pointsPerLevel = {L1_POINTS, L2_POINTS, L3_POINTS, L4_POINTS};
+        int total = 0;
+        for (int i = 0; i < coralPerLevel.length; i++) {
+            total += coralPerLevel[i] * pointsPerLevel[i];
+        }
+        return total;
+    }
+
+    public int endgameScore() {
+        return climbed ? CLIMB_POINTS : 0;  // ternary: if climbed then CLIMB_POINTS else 0
+    }
+
+    public int totalScore() {
+        return coralScore() + endgameScore();
+    }
+
+    public void printReport() {
+        System.out.println("=== " + teamName + " Match Report ===");
+        System.out.println("Coral score:   " + coralScore()   + " pts");
+        System.out.println("Endgame score: " + endgameScore() + " pts");
+        System.out.println("TOTAL:         " + totalScore()   + " pts");
+    }
+}
+```
+
+### **Using `MatchScorer`**
+
+```java
+MatchScorer team3603 = new MatchScorer("Team 3603");
+
+team3603.recordCoral(3, 2);  // 2 coral scored at Level 3 reef
+team3603.recordCoral(4, 1);  // 1 coral scored at Level 4 reef
+team3603.setClimbed(true);   // robot climbed at endgame
+
+team3603.printReport();
+
+// Output:
+// === Team 3603 Match Report ===
+// Coral score:   13 pts
+// Endgame score: 12 pts
+// TOTAL:         25 pts
+```
+
+### **Try This**
+
+1. Add a method `recordAutoLeave(boolean left)` that adds 3 points when the robot crossed the auto line.
+2. Add algae tracking: processor scores 6 pts each, net scores 4 pts each. Add `recordAlgae(int processor, int net)`.
+3. Create two `MatchScorer` objects for two different teams, score them, then print which team won.
+
+---
 
 ## **Learning Resources**
 
@@ -647,9 +765,19 @@ for (int item : arr) {
 
 ## **What's Next?**
 
-Once you've completed this guide and can check off all the "Check Your Understanding" items:
+Every concept in this level appears again in Level 2 — applied to a real robot. Here is how each skill lands:
 
-* **FTC Students:** Continue to **Level 2: Java for FTC**  
-* **FRC Students:** Continue to **Level 4: FRC Basics**
+| Level 1 skill | Level 2 application |
+|---|---|
+| Variables (`int speed`, `boolean isRunning`) | Motor power values, sensor readings, subsystem state flags |
+| If/else | Deciding when to run a motor, when to stop, when to switch modes |
+| For/while loops | Waiting for an encoder target, polling a sensor until a condition is met |
+| Methods | Organizing robot actions: `extend()`, `stop()`, `driveForward()` |
+| Classes and objects | Each mechanism becomes its own class — intake, arm, drivetrain |
+| Arrays | Storing encoder position targets, autonomous waypoint sequences |
 
-Remember: The goal isn't to memorize everything — it's to understand enough to start writing robot code, then learn more as you go\!
+**FTC students:** Continue to **Level 2: Java for FTC** to write your first working robot program.
+
+**FRC students:** Continue to **Level 4: FRC Basics** to jump straight into the command-based framework.
+
+The goal isn't to memorize everything — it's to understand enough to start writing robot code, then learn more as you go.
