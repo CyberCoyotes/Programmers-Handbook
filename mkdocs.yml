@@ -42,7 +42,8 @@ nav:
 plugins:
   - search
 
- pymdownx.superfences:
+markdown_extensions:
+  - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
