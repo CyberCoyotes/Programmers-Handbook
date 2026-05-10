@@ -8,23 +8,16 @@ Middle school FTC students who have completed **Level 1: Java Foundations**. Thi
 
 ## **Your Learning Path**
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                 LEVEL 1: Java Foundations                   │
-│            (Recommended if new to Java)                     │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   LEVEL 2: Java for FTC                     │
-│                      (You are here)                         │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│              LEVEL 3: Advanced FTC Patterns                 │
-│   State machines • Subsystem classes • Competition code     │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["LEVEL 1: Java Foundations<br/>(Recommended if new to Java)"]
+    B["LEVEL 2: Java for FTC<br/>(You are here)"]
+    C["LEVEL 3: Advanced FTC Patterns<br/>State Machines • Subsystems • Competition Code"]
+    D["LEVEL 4: FRC Basics<br/>FTC → Command-Based Transition"]
+
+    A --> B
+    B --> C
+    C --> D
 ```
 
 **Already know Java?** Skip to Part 2 and start learning FTC-specific patterns.
@@ -35,16 +28,19 @@ Middle school FTC students who have completed **Level 1: Java Foundations**. Thi
 
 ### **How FTC Code is Organized**
 
-```
-TeamCode/
-├── java/
-│   └── org/firstinspires/ftc/teamcode/
-│       ├── TeleOp/           ← Driver-controlled programs
-│       │   └── MainTeleOp.java
-│       ├── Autonomous/       ← Self-driving programs
-│       │   └── RedLeft.java
-│       └── Subsystems/       ← Reusable mechanism code (optional)
-│           └── Intake.java
+```mermaid
+flowchart TD
+    A["TeamCode/java/org/firstinspires/ftc/teamcode"]
+    B["TeleOp/<br/>Driver-controlled programs"]
+    C["Autonomous/<br/>Self-driving programs"]
+    D["Subsystems/<br/>Reusable mechanism code"]
+    E["MainTeleOp.java"]
+    F["RedLeft.java"]
+    G["Intake.java"]
+
+    A --> B --> E
+    A --> C --> F
+    A --> D --> G
 ```
 
 ### **The OpMode: Your Robot's Brain**
