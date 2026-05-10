@@ -531,7 +531,7 @@ Once you're comfortable with these basics:
 2. **Learn about sensors** — Color sensors, distance sensors, touch sensors  
 3. **Learn about roadrunner/pedropathing** — Advanced autonomous path following
 
-And when you move to FRC in high school, you'll be ready for **Level 3: Java Refresher for FRC**, which shows you how these concepts translate to the Command-Based framework\!
+And when you move to FRC in high school, you'll be ready for **Level 4: FRC Basics**, which shows you how these concepts translate to the Command-Based framework\!
 
 ---
 

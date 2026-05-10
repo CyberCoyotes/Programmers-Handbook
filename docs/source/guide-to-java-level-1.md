@@ -650,6 +650,6 @@ for (int item : arr) {
 Once you've completed this guide and can check off all the "Check Your Understanding" items:
 
 * **FTC Students:** Continue to **Level 2: Java for FTC**  
-* **FRC Students:** Continue to **Level 3: Java Refresher for FRC**
+* **FRC Students:** Continue to **Level 4: FRC Basics**
 
 Remember: The goal isn't to memorize everything — it's to understand enough to start writing robot code, then learn more as you go\!
