@@ -17,8 +17,8 @@ theme:
     - content.code.copy
   palette:
     - scheme: default
-      primary: red
-      accent: grey
+      primary: black
+      accent: red
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -37,12 +37,12 @@ nav:
   #  - Software Setup: Software-Installation-Setup.md
   #  - GitHub Workflow: GitHub-Workflow.md
   - Learn Java:
-    - Level 1 - FTC Basics: guide-to-java-level-1.md
-    - Level 2 - FTC: guide-to-java-level-2-ftc.md
-    - Level 3 - FTC: guide-to-java-level-3-ftc-advanced.md
-    - Level 4 - FRC Basics: guide-to-java-level-4-frc.md
-    - Level 5 - FRC: guide-to-java-level-5-frc-advanced.md
-    - Level 6 - FRC: guide-to-java-level-6-frc-expert.md
+    - Level 1: guide-to-java-level-1.md
+    - Level 2: guide-to-java-level-2.md
+    - Level 3: guide-to-java-level-3.md
+    - Level 4: guide-to-java-level-4.md
+    - Level 5: guide-to-java-level-5.md
+    - Level 6: guide-to-java-level-6.md
   #- Controls:
   #  - Introduction: controls/introduction.md
   #  - Guide to Controls: controls/3603-guide-to-controls.md
