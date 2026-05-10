@@ -845,6 +845,8 @@ You've learned state machines, subsystem classes, and multi-subsystem coordinati
 
 **The task:** Two subsystems — intake and arm — governed by coordination rules: the arm cannot move to SCORE while the intake is actively intaking (game piece not yet secured), and once the intake holds a piece, the arm moves to SCORE automatically.
 
+*Star Wars stretch analogy:* treat intake as the Millennium Falcon tractor beam and arm as cargo lift — do not raise the cargo lift until the tractor beam has secured the crate.
+
 This is the exact pattern that separates competition robots from practice robots.
 
 ### **`IntakeSubsystem.java`**
