@@ -1,9 +1,9 @@
 site_name: Cyber Coyotes Programmer's Handbook
 site_description: FRC 3603 Cyber Coyotes Programming Resources
 site_author: FRC 3603 Cyber Coyotes
-repo_url: https://github.com/CyberCoyotes/3603-CodingHandbook
-repo_name: CyberCoyotes/3603-CodingHandbook
-
+repo_url: https://github.com/CyberCoyotes/Programmers-Handbook
+repo_name: CyberCoyotes/Programmers-Handbook
+  
 docs_dir: docs/source
 
 theme:
@@ -23,8 +23,8 @@ theme:
         icon: material/brightness-7
         name: Switch to dark mode
     - scheme: slate
-      primary: blue
-      accent: cyan
+      primary: red
+      accent: black
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
