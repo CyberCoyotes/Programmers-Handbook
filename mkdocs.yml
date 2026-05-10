@@ -47,6 +47,7 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
+          # It's ok that VS Code is warning about this, it just doesn't know how to handle the custom format
           format: !!python/name:pymdownx.superfences.fence_code_format
 
   - pymdownx.highlight:

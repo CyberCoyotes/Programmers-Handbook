@@ -1,12 +1,5 @@
 # **Guide to Java \- Level 1: Foundations**
 
-# Test
-
-```mermaid
-flowchart TD
-    A --> B
-```
-
 ## **Who Is This For?**
 
 Any FIRST student — FTC or FRC — who needs to learn Java basics. No robot code here, just the fundamentals you'll need before touching any robot programming.  
@@ -21,10 +14,12 @@ flowchart TD
     A["LEVEL 1: Java Foundations<br/>(You are here)"]
 
     B["LEVEL 2<br/>Java for FTC<br/>(Middle School)"]
-    C["LEVEL 4<br/>FRC Basics<br/>(High School)"]
+    C["LEVEL 3<br/>Java for FTC<br/>(Middle School)"]
+    D["LEVEL 4<br/>FRC Basics<br/>(High School)"]
 
     A --> B
-    A --> C
+    B --> C
+    A --> D
 ```
 
 ## **How to Use This Guide**
