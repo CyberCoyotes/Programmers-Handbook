@@ -1,3 +1,0 @@
-====
-Conventions and Style Guide
-====
