@@ -4,7 +4,8 @@
 
 Any FIRST student — FTC or FRC — who needs to learn Java basics. No robot code here, just the fundamentals you'll need before touching any robot programming.  
 **Prerequisites:** None. Complete beginner friendly.  
-**Time to Complete:** 2-4 weeks with daily practice (30-60 min/day)
+**Time to Complete:** 2-4 weeks with daily practice (30-60 min/day)  
+**Reference:** [Glossary](glossary.md)
 
 ## **Your Learning Path**
 

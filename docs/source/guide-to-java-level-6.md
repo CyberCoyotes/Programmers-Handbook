@@ -6,7 +6,8 @@ FRC students who have completed Level 5 and are ready to add 3D vision to their 
 
 **Prerequisites:** Level 5: Advanced FRC Patterns (comfortable with path following, motion profiling, command compositions, fault handling)
 
-**Time to Complete:** 3–5 weeks; best done alongside a working swerve drivetrain
+**Time to Complete:** 3–5 weeks; best done alongside a working swerve drivetrain  
+**Reference:** [Glossary](glossary.md)
 
 ## **Your Learning Path**
 
@@ -220,7 +221,7 @@ A Limelight measurement takes time to arrive. By the time the robot reads `botpo
 
 ### **Where the Latency Comes From**
 
-```
+```text
 Camera captures frame
     │
     ▼  (pipeline latency: tag detection + solve)

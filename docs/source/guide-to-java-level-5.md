@@ -6,7 +6,8 @@ FRC students who understand the basics of Command-Based and want to level up. Th
 
 **Prerequisites:** Level 4: FRC Basics (comfortable with subsystems, basic commands, button bindings)
 
-**Time to Complete:** Ongoing reference throughout the season
+**Time to Complete:** Ongoing reference throughout the season  
+**Reference:** [Glossary](glossary.md)
 
 ## **Your Learning Path**
 
@@ -652,7 +653,7 @@ public class Arm extends SubsystemBase {
 
 Drawing a state diagram helps design your state machine:
 
-```
+```text
                     ┌───────────────────────┐
                     │                       │
                     ▼                       │
@@ -1036,7 +1037,7 @@ Choreo is a desktop application for designing robot paths. It exports a `.traj` 
 
 Choreo exports to `deploy/choreo/<name>.traj`. This directory is deployed to the roboRIO by WPILib's Gradle build.
 
-```
+```text
 src/
 └── main/
     └── deploy/
@@ -1129,7 +1130,7 @@ public void resetOdometry(Pose2d pose) {
 
 ### **The Feedback Loop**
 
-```
+```text
 Trajectory (desired pose at time t)
          │
          ▼

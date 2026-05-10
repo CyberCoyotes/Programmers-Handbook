@@ -4,7 +4,8 @@
 
 Middle school FTC students who have completed **Level 1: Java Foundations**. This guide bridges pure Java knowledge into FTC robot programming.  
 **Prerequisites:** Java basics (Level 1 or equivalent — a class, self-taught, or prior experience)  
-**Time to Complete:** 2-3 weeks alongside robot build
+**Time to Complete:** 2-3 weeks alongside robot build  
+**Reference:** [Glossary](glossary.md)
 
 ## **Your Learning Path**
 

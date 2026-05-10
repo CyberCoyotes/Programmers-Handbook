@@ -6,7 +6,8 @@ FTC students who have the basics down and want to write cleaner, more reliable c
 
 **Prerequisites:** Level 2: Java for FTC (or equivalent experience)
 
-**Time to Complete:** 2-3 weeks alongside competition prep
+**Time to Complete:** 2-3 weeks alongside competition prep  
+**Reference:** [Glossary](glossary.md)
 
 ---
 
@@ -217,7 +218,7 @@ public class StateMachineTeleOp extends LinearOpMode {
 
 Visualize your state machine before coding:
 
-```
+```text
                     ┌─────────────────────────────┐
                     │                             │
                     ▼                             │
@@ -274,7 +275,7 @@ public class MessyTeleOp extends LinearOpMode {
 
 Break your robot into logical pieces:
 
-```
+```text
 Robot
 ├── Drivetrain (4 motors)
 ├── Intake (1 motor, 1 sensor)
