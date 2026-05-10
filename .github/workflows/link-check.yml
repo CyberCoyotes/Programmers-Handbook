@@ -19,8 +19,8 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
-            --base site/
+            --base "${{ github.workspace }}/site"
             --include-fragments
             --no-progress
-            'site/**/*.html'
+            '${{ github.workspace }}/site/**/*.html'
           fail: true
