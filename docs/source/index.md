@@ -5,8 +5,7 @@
 
 # **Introduction**
 
-Welcome\! We hope these Guides will help you transition from FTC-style programming to FRC Command-Based programming. If you've done FTC, you already know more than you think—many concepts transfer directly, just with different names and patterns.
-
+Welcome\! We hope these Guides will help you transition from FTC-style programming to FRC Command-Based programming. If you've done FTC, you already know more than you think — many concepts transfer directly, just with different names and patterns.
 
 ## **FTC → FRC: Key Differences**
 
