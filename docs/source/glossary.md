@@ -6,9 +6,6 @@ Terms used consistently throughout this handbook. When a word has multiple indus
 
 ## A
 
-**admonition**
-A styled callout block in the handbook (e.g., `!!! note "Coach"` or `??? info`). Used for coach notes, Current FTC sidebars, and warnings.
-
 **AprilTag**
 A fiducial marker used on FRC and FTC fields. Cameras detect them to estimate the robot's 3D position relative to a known tag location.
 
