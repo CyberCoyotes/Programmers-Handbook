@@ -31,8 +31,14 @@ A trajectory authoring app for FRC swerve drives. Exports `.traj` files that Cho
 **command** (FRC)
 A unit of robot behavior in WPILib's command-based framework. Commands declare which subsystems they require and implement `initialize()`, `execute()`, `isFinished()`, and `end()`.
 
+**command-based**
+A WPILib programming paradigm where robot behavior is organized into Commands and Subsystems. Commands encode actions; the `CommandScheduler` manages their lifecycle and resolves conflicts. The primary framework used in FRC.
+
 **`CommandScheduler`**
 The WPILib singleton that runs every scheduled command once per 20 ms loop and resolves requirement conflicts between commands.
+
+**constructor**
+A special Java method called when a new object is created. It has the same name as the class and initializes the object's fields. In FRC, subsystem constructors typically configure motor controllers and sensors.
 
 **CTRE** (Cross The Road Electronics)
 The vendor that makes Talon FX motor controllers, CANcoders, and the Pigeon 2 IMU. Their API is called Phoenix 6 in current FRC.
@@ -41,11 +47,20 @@ The vendor that makes Talon FX motor controllers, CANcoders, and the Pigeon 2 IM
 
 ## D
 
+**data types**
+The category of a value in Java, which determines what kind of data it can hold and what operations can be performed on it. Primitive types include `int`, `double`, and `boolean`; reference types include classes like `String` and subsystem classes.
+
 **dead-wheel odometry**
 Position tracking using unpowered wheels (contact wheels or omni wheels) connected to encoders, not affected by motor slip.
 
+**debounce**
+A technique that prevents a rapidly toggling input (e.g., a noisy sensor or button) from triggering repeated actions. WPILib's `Debouncer` requires a signal to be stable for a set duration before registering a state change.
+
 **default command**
 A command that runs on a subsystem whenever no other command requiring that subsystem is scheduled. Set with `subsystem.setDefaultCommand()`.
+
+**driver station**
+The FRC software application running on the driver laptop that connects to the robot's roboRIO over Wi-Fi or Ethernet. It enables/disables the robot and selects the operating mode (autonomous, teleop, or test).
 
 ---
 
@@ -91,6 +106,9 @@ The FTC SDK object used to retrieve hardware devices by name. Example: `hardware
 **IMU** (Inertial Measurement Unit)
 A sensor that measures rotation rate and acceleration. The Pigeon 2 (FRC) and built-in REV Control Hub IMU (FTC) provide heading data used by odometry and field-relative drive.
 
+**iterative-based**
+A WPILib programming style where the robot class overrides `autonomousPeriodic()`, `teleopPeriodic()`, and similar methods called repeatedly in a loop. An alternative with less abstraction than the command-based framework, but requires manual state management for complex behaviors.
+
 ---
 
 ## K
@@ -124,9 +142,15 @@ Generic term for a robot mechanism. The handbook prefers *subsystem* to match WP
 **MegaTag2**
 Limelight's multi-tag, IMU-assisted pose solving mode. Produces a tighter XY estimate than single-tag solving. Do not trust its rotation output — use the gyro directly.
 
+**method**
+A named block of code in a Java class that performs a specific task. Defined with a return type, a name, and optional parameters. In FRC subsystems, methods like `intake()` or `stop()` express the robot's intent.
+
 ---
 
 ## O
+
+**object**
+An instance of a Java class that bundles data (fields) and behavior (methods). In FRC, every subsystem, command, and hardware device is an object created from its respective class.
 
 **odometry**
 Estimating the robot's field position by integrating wheel encoder and gyro readings over time. Accumulates error; corrected by vision in Level 6.
@@ -204,6 +228,9 @@ A WPILib class representing a boolean condition (button press, sensor reading, e
 ---
 
 ## V
+
+**variable**
+A named storage location in Java that holds a value of a specific data type. Variables can be local (inside a method), instance fields (belonging to an object), or static (shared across all instances of a class).
 
 **vendor dependency** (also: *vendordep*)
 A JSON file that tells the WPILib Gradle build where to download a third-party library (CTRE Phoenix 6, ChoreoLib, etc.). Placed in `vendordeps/` in the project root.
