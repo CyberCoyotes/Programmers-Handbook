@@ -5,21 +5,7 @@
 
 # **Introduction**
 
-Welcome\! We hope these Guides will help you transition from FTC-style programming to FRC Command-Based programming. If you've done FTC, you already know more than you think — many concepts transfer directly, just with different names and patterns.
-
-> **Publishing note:** These docs are built with **Material for MkDocs** and published via **GitHub Pages**.
-
-## **FTC → FRC: Key Differences**
-
-In 2026-2027, FTC uses an **iterative/time-based** Java approach where your `opModeLoop()` runs continuously and you check conditions each cycle. FRC's **Command-Based** framework is *event-driven* — you declare what should happen when certain conditions are met, and the framework handles the execution.
-
-| FTC Concept | FRC Equivalent |
-| :---- | :---- |
-| `opModeLoop()` checking conditions | Triggers that automatically fire commands |
-| Big `if/else` chains in teleop | Button bindings in RobotContainer |
-| Motor/servo wrapper classes | Subsystems |
-| State variables scattered around | State machines within subsystems |
-| `LinearOpMode` | Command-Based Robot project |
+Welcome\! We hope these guides originally started as a transition from FTC to FRC. We are currently revising them to help new programmers learn Java for FTC robotics and FRC robotics. There are numerous pages on WPI Lib to help you learn about programming for FIRST robotics. In our experience though new programmers don't know where to start and as of today does not seem to be a clear learning path for newbies. We hope to bridge the gap with our guides.
 
 ## **How to Use These Guides**
 
@@ -39,8 +25,10 @@ In 2026-2027, FTC uses an **iterative/time-based** Java approach where your `opM
 
 ## **Getting Help**
 
-- **Stuck on a concept?** Ask in myself, teammates, email
+- **Students stuck on a concept?** Ask myself, teammates, or email.
 - **Code not working?** Check the WPILib docs first, then ask  
 - **Found a bug in these Guides?** Let us know so we can fix it\!
 
 **Remember:** Every experienced programmer was once a beginner. The only bad question is the one you don't ask.  
+
+(https://bit.ly/frc3603-programming)
