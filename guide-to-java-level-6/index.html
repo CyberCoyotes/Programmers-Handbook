@@ -1,0 +1,2167 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="FRC 3603 Cyber Coyotes Programming Resources">
+      
+      
+        <meta name="author" content="FRC 3603 Cyber Coyotes">
+      
+      
+      
+        <link rel="prev" href="../guide-to-java-level-5/">
+      
+      
+        <link rel="next" href="../glossary/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Level 6 - Cyber Coyotes Programmer's Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-to-java-level-6-vision-and-field-relative-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Cyber Coyotes Programmer&#39;s Handbook" class="md-header__button md-logo" aria-label="Cyber Coyotes Programmer's Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cyber Coyotes Programmer's Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Level 6
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="black"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CyberCoyotes/Programmers-Handbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CyberCoyotes/Programmers-Handbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../guide-to-java-level-1/" class="md-tabs__link">
+          
+  
+  
+  Learn Java
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../glossary/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Glossary
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Cyber Coyotes Programmer&#39;s Handbook" class="md-nav__button md-logo" aria-label="Cyber Coyotes Programmer's Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Cyber Coyotes Programmer's Handbook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CyberCoyotes/Programmers-Handbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    CyberCoyotes/Programmers-Handbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learn Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide-to-java-level-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide-to-java-level-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide-to-java-level-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide-to-java-level-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide-to-java-level-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 6
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#who-is-this-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who Is This For?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-learning-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Learning Path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-how-limelight-4-sees-the-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1: How Limelight 4 Sees the Field
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1: How Limelight 4 Sees the Field">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-camera-returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Camera Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-camera-in-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring the Camera in Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-megatag-style-multi-tag-solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2: MegaTag-Style Multi-Tag Solving
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2: MegaTag-Style Multi-Tag Solving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#megatag1-vs-megatag2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MegaTag1 vs. MegaTag2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-multi-tag-helps-and-hurts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Multi-Tag Helps (and Hurts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-fusing-vision-pose-with-swerve-odometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3: Fusing Vision Pose with Swerve Odometry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3: Fusing Vision Pose with Swerve Odometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-pose-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up the Pose Estimator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-odometry-and-adding-vision-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating Odometry and Adding Vision Measurements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-and-adaptively-trusting-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validating and Adaptively Trusting Vision
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-latency-compensation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4: Latency Compensation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4: Latency Compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-the-latency-comes-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the Latency Comes From
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why It Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-5-field-relative-drive-and-scoring-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5: Field-Relative Drive and Scoring Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 5: Field-Relative Drive and Scoring Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#field-relative-chassis-speeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field-Relative Chassis Speeds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teleop-field-relative-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teleop Field-Relative Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drive-to-nearest-scoring-location-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Drive to Nearest Scoring Location" Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-6-vision-dropout-recovery-and-graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 6: Vision-Dropout Recovery and Graceful Degradation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 6: Vision-Dropout Recovery and Graceful Degradation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dropout-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropout Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adapting-autonomous-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adapting Autonomous Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-seeding-after-a-known-good-pose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Re-Seeding After a Known-Good Pose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capstone-vision-assisted-two-piece-auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capstone: Vision-Assisted Two-Piece Auto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capstone: Vision-Assisted Two-Piece Auto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visionposeupdaterjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VisionPoseUpdater.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autonomousroutinesjava-vision-assisted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AutonomousRoutines.java (Vision-Assisted)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try This
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#who-is-this-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who Is This For?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-learning-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Learning Path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-how-limelight-4-sees-the-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1: How Limelight 4 Sees the Field
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1: How Limelight 4 Sees the Field">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-camera-returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Camera Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-camera-in-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring the Camera in Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-megatag-style-multi-tag-solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2: MegaTag-Style Multi-Tag Solving
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2: MegaTag-Style Multi-Tag Solving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#megatag1-vs-megatag2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MegaTag1 vs. MegaTag2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-multi-tag-helps-and-hurts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Multi-Tag Helps (and Hurts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-fusing-vision-pose-with-swerve-odometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3: Fusing Vision Pose with Swerve Odometry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3: Fusing Vision Pose with Swerve Odometry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-pose-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up the Pose Estimator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-odometry-and-adding-vision-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating Odometry and Adding Vision Measurements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-and-adaptively-trusting-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validating and Adaptively Trusting Vision
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-latency-compensation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4: Latency Compensation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4: Latency Compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-the-latency-comes-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the Latency Comes From
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-it-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why It Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-5-field-relative-drive-and-scoring-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5: Field-Relative Drive and Scoring Commands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 5: Field-Relative Drive and Scoring Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#field-relative-chassis-speeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field-Relative Chassis Speeds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teleop-field-relative-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teleop Field-Relative Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drive-to-nearest-scoring-location-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Drive to Nearest Scoring Location" Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-6-vision-dropout-recovery-and-graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 6: Vision-Dropout Recovery and Graceful Degradation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 6: Vision-Dropout Recovery and Graceful Degradation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dropout-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropout Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adapting-autonomous-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adapting Autonomous Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-seeding-after-a-known-good-pose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Re-Seeding After a Known-Good Pose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capstone-vision-assisted-two-piece-auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capstone: Vision-Assisted Two-Piece Auto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capstone: Vision-Assisted Two-Piece Auto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visionposeupdaterjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VisionPoseUpdater.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autonomousroutinesjava-vision-assisted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AutonomousRoutines.java (Vision-Assisted)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try This
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guide-to-java-level-6-vision-and-field-relative-programming"><strong>Guide to Java - Level 6: Vision and Field-Relative Programming</strong><a class="headerlink" href="#guide-to-java-level-6-vision-and-field-relative-programming" title="Permanent link">&para;</a></h1>
+<h2 id="who-is-this-for"><strong>Who Is This For?</strong><a class="headerlink" href="#who-is-this-for" title="Permanent link">&para;</a></h2>
+<p>FRC students who have completed Level 5 and are ready to add 3D vision to their autonomous routines. This guide covers AprilTag pose estimation with Limelight 4, fusing vision with odometry, and writing commands that operate in field coordinates.</p>
+<p><strong>Prerequisites:</strong> Level 5: Advanced FRC Patterns (comfortable with path following, motion profiling, command compositions, fault handling)</p>
+<p><strong>Time to Complete:</strong> 3–5 weeks; best done alongside a working swerve drivetrain<br />
+<strong>Reference:</strong> <a href="../glossary/">Glossary</a></p>
+<h2 id="your-learning-path"><strong>Your Learning Path</strong><a class="headerlink" href="#your-learning-path" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A["LEVEL 5: Advanced FRC Patterns&lt;br/&gt;(Path following, motion profiling, fault handling)"]
+    B["LEVEL 6: Vision &amp; Field-Relative&lt;br/&gt;(You are here)"]
+    C["Competition-Ready&lt;br/&gt;(Vision-assisted autos, field-relative scoring)"]
+
+    A --&gt; B
+    B --&gt; C</code></pre>
+<hr />
+<h2 id="part-1-how-limelight-4-sees-the-field"><strong>Part 1: How Limelight 4 Sees the Field</strong><a class="headerlink" href="#part-1-how-limelight-4-sees-the-field" title="Permanent link">&para;</a></h2>
+<p>The Limelight 4 uses a Hailo neural-processing coprocessor to detect AprilTags at high speed. Unlike a laptop-based coprocessor, all computation happens on the camera itself — the robot just reads results over NetworkTables.</p>
+<h3 id="what-the-camera-returns"><strong>What the Camera Returns</strong><a class="headerlink" href="#what-the-camera-returns" title="Permanent link">&para;</a></h3>
+<p>For each frame, the Limelight reports:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Field</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>botpose_wpiblue</code></td>
+<td style="text-align: left;">Robot pose in WPILib field coordinates (Blue origin)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>botpose_wpired</code></td>
+<td style="text-align: left;">Same, but from the Red alliance origin</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tid</code></td>
+<td style="text-align: left;">ID of the primary tracked tag</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tl</code></td>
+<td style="text-align: left;">Pipeline latency (ms)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>cl</code></td>
+<td style="text-align: left;">Capture latency (ms)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tv</code></td>
+<td style="text-align: left;">1 if a valid target is visible, 0 otherwise</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>botpose_wpiblue</code> array is <code>[x, y, z, roll, pitch, yaw, total_latency_ms, tag_count, tag_span, avg_tag_dist, avg_tag_area]</code>.</p>
+<h3 id="configuring-the-camera-in-code"><strong>Configuring the Camera in Code</strong><a class="headerlink" href="#configuring-the-camera-in-code" title="Permanent link">&para;</a></h3>
+<p>Use <code>LimelightHelpers</code> (available from the Limelight vendor page) as a thin NetworkTables wrapper:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">frc.robot.LimelightHelpers</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">frc.robot.LimelightHelpers.PoseEstimate</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VisionSubsystem</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SubsystemBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CAMERA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;limelight&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// Enable MegaTag2 (IMU-assisted, multi-tag). Must be called before each measurement.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">enableMegaTag2</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">robotYawDegrees</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="n">LimelightHelpers</span><span class="p">.</span><span class="na">SetRobotOrientation</span><span class="p">(</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">            </span><span class="n">CAMERA</span><span class="p">,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">            </span><span class="n">robotYawDegrees</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="c1">// yaw, yaw rate, pitch, pitch rate, roll, roll rate</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">            </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PoseEstimate</span><span class="w"> </span><span class="nf">getLatestEstimate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LimelightHelpers</span><span class="p">.</span><span class="na">getBotPoseEstimate_wpiBlue_MegaTag2</span><span class="p">(</span><span class="n">CAMERA</span><span class="p">);</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">hasTarget</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LimelightHelpers</span><span class="p">.</span><span class="na">getTV</span><span class="p">(</span><span class="n">CAMERA</span><span class="p">);</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Coach</p>
+<p><!-- category: common student misconception -->
+Students expect vision to be plug-and-play. It isn't. The camera must be mechanically rigid (no flex in the mount), the field layout JSON on the Limelight must match your event's AprilTag version (2024 tags ≠ 2025 tags), and the camera's physical offset from the robot center (<code>setCameraPose_RobotSpace</code>) must be measured accurately. Debug each of these before you even look at pose numbers.</p>
+</div>
+<details class="info">
+<summary>Current FTC (2026)</summary>
+<p><!-- category: ecosystem convergence -->
+<strong>FTC AprilTag detection.</strong> The FTC SDK 10.x includes a built-in <code>AprilTagProcessor</code> that returns tag pose in robot-relative coordinates. Limelight 3A and 4 are legal FTC hardware and return data via the same NetworkTables API used in FRC. Field-coordinate pose estimation in FTC is less common than in FRC, but the concepts — tag-to-robot transform, field layout JSON, latency — are identical. If your team uses a Limelight in FTC, everything in Parts 1–3 applies directly.</p>
+</details>
+<hr />
+<h2 id="part-2-megatag-style-multi-tag-solving"><strong>Part 2: MegaTag-Style Multi-Tag Solving</strong><a class="headerlink" href="#part-2-megatag-style-multi-tag-solving" title="Permanent link">&para;</a></h2>
+<p>A single tag gives an ambiguous 3D pose — from one tag you can't always tell if the camera is close-and-facing-forward or far-and-tilted. Two or more tags eliminate the ambiguity and also produce a more stable XY position estimate.</p>
+<h3 id="megatag1-vs-megatag2"><strong>MegaTag1 vs. MegaTag2</strong><a class="headerlink" href="#megatag1-vs-megatag2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">MegaTag1</th>
+<th style="text-align: left;">MegaTag2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Input</td>
+<td style="text-align: left;">One tag at a time</td>
+<td style="text-align: left;">All visible tags simultaneously</td>
+</tr>
+<tr>
+<td style="text-align: left;">IMU required</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes (robot heading from gyro)</td>
+</tr>
+<tr>
+<td style="text-align: left;">XY accuracy</td>
+<td style="text-align: left;">Good when close</td>
+<td style="text-align: left;">Better at distance</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rotation estimate</td>
+<td style="text-align: left;">Often noisy</td>
+<td style="text-align: left;"><strong>Do not use</strong> — use gyro instead</td>
+</tr>
+<tr>
+<td style="text-align: left;">Best for</td>
+<td style="text-align: left;">Single-tag fallback</td>
+<td style="text-align: left;">Primary estimator on swerve</td>
+</tr>
+</tbody>
+</table>
+<p>MegaTag2 uses your gyro heading to constrain the solve, so it produces a much tighter XY estimate — but it relies on the gyro being correct. If the gyro drifts, the XY estimate drifts with it.</p>
+<h3 id="when-multi-tag-helps-and-hurts"><strong>When Multi-Tag Helps (and Hurts)</strong><a class="headerlink" href="#when-multi-tag-helps-and-hurts" title="Permanent link">&para;</a></h3>
+<p>Multi-tag is better when:</p>
+<ul>
+<li>You're far from any single tag and need global position</li>
+<li>You're scoring on a structure with multiple nearby tags (e.g., Reef)</li>
+</ul>
+<p>Multi-tag is worse when:</p>
+<ul>
+<li>Tags span a very wide angle and the geometry is degenerate</li>
+<li>Only one tag is visible anyway (the solver falls back to single-tag automatically)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Coach</p>
+<p><!-- category: common student misconception -->
+The single most common MegaTag2 mistake is trusting its <em>rotation</em> output. MegaTag2 conditions the solve on the gyro heading — which means its rotation output is just your gyro heading echoed back. Use the gyro directly for heading; only take XY from MegaTag2. If you fuse the rotation from MegaTag2 you are creating a circular dependency.</p>
+</div>
+<hr />
+<h2 id="part-3-fusing-vision-pose-with-swerve-odometry"><strong>Part 3: Fusing Vision Pose with Swerve Odometry</strong><a class="headerlink" href="#part-3-fusing-vision-pose-with-swerve-odometry" title="Permanent link">&para;</a></h2>
+<p><code>SwerveDrivePoseEstimator</code> works like <code>SwerveDriveOdometry</code> but adds a <code>addVisionMeasurement()</code> method that blends in periodic vision corrections using a Kalman filter.</p>
+<h3 id="setting-up-the-pose-estimator"><strong>Setting Up the Pose Estimator</strong><a class="headerlink" href="#setting-up-the-pose-estimator" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.estimator.SwerveDrivePoseEstimator</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.VecBuilder</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// In DrivetrainSubsystem</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SwerveDrivePoseEstimator</span><span class="w"> </span><span class="n">poseEstimator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SwerveDrivePoseEstimator</span><span class="p">(</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">kinematics</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">getGyroAngle</span><span class="p">(),</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">getModulePositions</span><span class="p">(),</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Pose2d</span><span class="p">(),</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="c1">// Odometry standard deviations [x_m, y_m, heading_rad]</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">VecBuilder</span><span class="p">.</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">),</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="c1">// Vision standard deviations [x_m, y_m, heading_rad] — large = less trust</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="n">VecBuilder</span><span class="p">.</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="p">)</span><span class="w">    </span><span class="c1">// never trust vision heading</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">);</span>
+</code></pre></div>
+<p>The standard deviations are noise estimates — lower values mean "trust this source more." For vision heading, use a very large number (e.g. 9999) to effectively ignore the camera's rotation output and rely only on the gyro.</p>
+<h3 id="updating-odometry-and-adding-vision-measurements"><strong>Updating Odometry and Adding Vision Measurements</strong><a class="headerlink" href="#updating-odometry-and-adding-vision-measurements" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Override</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="c1">// Always update from wheel encoders + gyro</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">poseEstimator</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">getGyroAngle</span><span class="p">(),</span><span class="w"> </span><span class="n">getModulePositions</span><span class="p">());</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="c1">// Pull the latest vision estimate and add it (if valid)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">vision</span><span class="p">.</span><span class="na">enableMegaTag2</span><span class="p">(</span><span class="n">getGyroAngle</span><span class="p">().</span><span class="na">getDegrees</span><span class="p">());</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vision</span><span class="p">.</span><span class="na">getLatestEstimate</span><span class="p">();</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isValidEstimate</span><span class="p">(</span><span class="n">estimate</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="n">poseEstimator</span><span class="p">.</span><span class="na">addVisionMeasurement</span><span class="p">(</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">            </span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">,</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">            </span><span class="n">estimate</span><span class="p">.</span><span class="na">timestampSeconds</span><span class="p">,</span><span class="w">    </span><span class="c1">// latency-compensated timestamp</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">            </span><span class="n">getVisionStdDevs</span><span class="p">(</span><span class="n">estimate</span><span class="p">)</span><span class="w">    </span><span class="c1">// adaptive trust</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="n">field2d</span><span class="p">.</span><span class="na">setRobotPose</span><span class="p">(</span><span class="n">getPose</span><span class="p">());</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="p">}</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="kd">public</span><span class="w"> </span><span class="n">Pose2d</span><span class="w"> </span><span class="nf">getPose</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">poseEstimator</span><span class="p">.</span><span class="na">getEstimatedPosition</span><span class="p">();</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="p">}</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">resetOdometry</span><span class="p">(</span><span class="n">Pose2d</span><span class="w"> </span><span class="n">pose</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span><span class="n">poseEstimator</span><span class="p">.</span><span class="na">resetPosition</span><span class="p">(</span><span class="n">getGyroAngle</span><span class="p">(),</span><span class="w"> </span><span class="n">getModulePositions</span><span class="p">(),</span><span class="w"> </span><span class="n">pose</span><span class="p">);</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="validating-and-adaptively-trusting-vision"><strong>Validating and Adaptively Trusting Vision</strong><a class="headerlink" href="#validating-and-adaptively-trusting-vision" title="Permanent link">&para;</a></h3>
+<p>Not every vision measurement is trustworthy. Reject measurements that are clearly wrong before passing them to the estimator:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isValidEstimate</span><span class="p">(</span><span class="n">LimelightHelpers</span><span class="p">.</span><span class="na">PoseEstimate</span><span class="w"> </span><span class="n">estimate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estimate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estimate</span><span class="p">.</span><span class="na">tagCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="c1">// Reject if pose is outside the field boundary (field is ~16.5 m × 8.2 m)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">.</span><span class="na">getX</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">.</span><span class="na">getX</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">16.5</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">.</span><span class="na">getY</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">8.2</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="c1">// Reject if robot appears to be moving very fast (likely a tag flip artifact)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">getChassisSpeed</span><span class="p">().</span><span class="na">vxMetersPerSecond</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">avgTagDist</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="kd">private</span><span class="w"> </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">N3</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getVisionStdDevs</span><span class="p">(</span><span class="n">LimelightHelpers</span><span class="p">.</span><span class="na">PoseEstimate</span><span class="w"> </span><span class="n">estimate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="c1">// The further the tag, the less we trust position</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">distanceFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">avgTagDist</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">avgTagDist</span><span class="p">;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estimate</span><span class="p">.</span><span class="na">tagCount</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="c1">// Multi-tag: trust more</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">VecBuilder</span><span class="p">.</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">distanceFactor</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">distanceFactor</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="p">);</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="c1">// Single tag: trust less</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">VecBuilder</span><span class="p">.</span><span class="na">fill</span><span class="p">(</span><span class="mf">0.9</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">distanceFactor</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">distanceFactor</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="p">);</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Coach</p>
+<p><!-- category: let them fail here -->
+Let students pick stdDevs by intuition once. They will almost always make vision too trusted (small stdDevs) and the robot will jerk when tags appear or disappear. After they see this, have them log vision error vs. odometry error over several test runs and pick values empirically. Five minutes of logging saves an hour of guessing.</p>
+</div>
+<details class="info">
+<summary>Current FTC (2026)</summary>
+<p><!-- category: ecosystem convergence -->
+<strong>FTC pose fusion.</strong> FTC teams using Road Runner or Pedro Pathing rely entirely on dead-wheel odometry for pose — there is no equivalent of <code>addVisionMeasurement</code>. In the converging FTC/FRC ecosystem, a Kalman-filter pose estimator is a planned addition to the FTC SDK. For now, FTC students reading this level should understand the concept: wheel odometry drifts; vision corrects it periodically; the filter weighs each source by its expected noise.</p>
+</details>
+<hr />
+<h2 id="part-4-latency-compensation"><strong>Part 4: Latency Compensation</strong><a class="headerlink" href="#part-4-latency-compensation" title="Permanent link">&para;</a></h2>
+<p>A Limelight measurement takes time to arrive. By the time the robot reads <code>botpose_wpiblue</code>, the robot has moved. WPILib's pose estimator automatically back-projects the correction if you pass the correct timestamp.</p>
+<h3 id="where-the-latency-comes-from"><strong>Where the Latency Comes From</strong><a class="headerlink" href="#where-the-latency-comes-from" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Camera captures frame
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    │
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    ▼  (pipeline latency: tag detection + solve)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Limelight posts result to NetworkTables
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    │
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    ▼  (network latency: ~1–2 ms on a wired connection)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Robot code reads the result
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    │
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    ▼  Total: typically 30–80 ms
+</code></pre></div>
+<p>Limelight provides both components:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Total latency in milliseconds</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">double</span><span class="w"> </span><span class="n">totalLatencyMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">latency</span><span class="p">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">// Reconstruct the timestamp of when the frame was captured</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kt">double</span><span class="w"> </span><span class="n">captureTimestampSeconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Timer</span><span class="p">.</span><span class="na">getFPGATimestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">totalLatencyMs</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">);</span>
+</code></pre></div>
+<p><code>LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2()</code> fills <code>estimate.timestampSeconds</code> with this value automatically — you do not need to compute it manually if you use that helper.</p>
+<h3 id="why-it-matters"><strong>Why It Matters</strong><a class="headerlink" href="#why-it-matters" title="Permanent link">&para;</a></h3>
+<p>Without compensation, if the robot is moving quickly (say, 3 m/s) and the latency is 50 ms, the robot has moved 0.15 m since the frame was captured. Applying the measurement to the current timestamp shifts the pose estimate 0.15 m in the wrong direction. With compensation, the estimator back-projects the correction to where the robot <em>was</em> at capture time, which is correct.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Correct: pass the capture timestamp, not the current time</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">poseEstimator</span><span class="p">.</span><span class="na">addVisionMeasurement</span><span class="p">(</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">estimate</span><span class="p">.</span><span class="na">timestampSeconds</span><span class="p">,</span><span class="w">  </span><span class="c1">// when the frame was captured</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="n">stdDevs</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Coach</p>
+<p><!-- category: real-robot demo opportunity -->
+Demo this live: place the robot in an auto routine, then wave your hand in front of the camera for one second to block the tag. With latency compensation the pose estimate holds steady via odometry and then smoothly converges when the tag reappears. Without compensation (or with naively using the current timestamp), the convergence jerk is visible. Students remember what they see.</p>
+</div>
+<hr />
+<h2 id="part-5-field-relative-drive-and-scoring-commands"><strong>Part 5: Field-Relative Drive and Scoring Commands</strong><a class="headerlink" href="#part-5-field-relative-drive-and-scoring-commands" title="Permanent link">&para;</a></h2>
+<p>Field-relative drive means joystick "forward" always moves the robot toward the opposing alliance wall — regardless of which direction the robot is pointing. This requires translating joystick inputs from field coordinates to robot-relative chassis speeds using the robot's current heading.</p>
+<h3 id="field-relative-chassis-speeds"><strong>Field-Relative Chassis Speeds</strong><a class="headerlink" href="#field-relative-chassis-speeds" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// In DrivetrainSubsystem</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">driveFieldRelative</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">xFieldSpeed</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">yFieldSpeed</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">omega</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">ChassisSpeeds</span><span class="w"> </span><span class="n">robotRelative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChassisSpeeds</span><span class="p">.</span><span class="na">fromFieldRelativeSpeeds</span><span class="p">(</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="n">xFieldSpeed</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="n">yFieldSpeed</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="n">omega</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="n">getPose</span><span class="p">().</span><span class="na">getRotation</span><span class="p">()</span><span class="w">   </span><span class="c1">// current heading from pose estimator</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="n">driveRobotRelative</span><span class="p">(</span><span class="n">robotRelative</span><span class="p">);</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="teleop-field-relative-command"><strong>Teleop Field-Relative Command</strong><a class="headerlink" href="#teleop-field-relative-command" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">fieldRelativeDrive</span><span class="p">(</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">DoubleSupplier</span><span class="w"> </span><span class="n">xSupplier</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">DoubleSupplier</span><span class="w"> </span><span class="n">ySupplier</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="n">DoubleSupplier</span><span class="w"> </span><span class="n">omegaSupplier</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">run</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">        </span><span class="c1">// Apply a deadband and square the inputs for better driver feel</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MathUtil</span><span class="p">.</span><span class="na">applyDeadband</span><span class="p">(</span><span class="n">xSupplier</span><span class="p">.</span><span class="na">getAsDouble</span><span class="p">(),</span><span class="w"> </span><span class="mf">0.08</span><span class="p">);</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MathUtil</span><span class="p">.</span><span class="na">applyDeadband</span><span class="p">(</span><span class="n">ySupplier</span><span class="p">.</span><span class="na">getAsDouble</span><span class="p">(),</span><span class="w"> </span><span class="mf">0.08</span><span class="p">);</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MathUtil</span><span class="p">.</span><span class="na">applyDeadband</span><span class="p">(</span><span class="n">omegaSupplier</span><span class="p">.</span><span class="na">getAsDouble</span><span class="p">(),</span><span class="w"> </span><span class="mf">0.08</span><span class="p">);</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">        </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">driveFieldRelative</span><span class="p">(</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DriveConstants</span><span class="p">.</span><span class="na">MAX_SPEED_MPS</span><span class="p">,</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">            </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DriveConstants</span><span class="p">.</span><span class="na">MAX_SPEED_MPS</span><span class="p">,</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">            </span><span class="n">omega</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DriveConstants</span><span class="p">.</span><span class="na">MAX_ANGULAR_SPEED_RPS</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="p">});</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="p">}</span>
+</code></pre></div>
+<p>Set this as the drivetrain's default command in <code>RobotContainer</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">drivetrain</span><span class="p">.</span><span class="na">setDefaultCommand</span><span class="p">(</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="n">DriveCommands</span><span class="p">.</span><span class="na">fieldRelativeDrive</span><span class="p">(</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">        </span><span class="n">drivetrain</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">        </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftY</span><span class="p">(),</span><span class="w">   </span><span class="c1">// forward/back (negate for WPILib convention)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getLeftX</span><span class="p">(),</span><span class="w">   </span><span class="c1">// strafe</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">driver</span><span class="p">.</span><span class="na">getRightX</span><span class="p">()</span><span class="w">   </span><span class="c1">// rotate</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">);</span>
+</code></pre></div>
+<h3 id="drive-to-nearest-scoring-location-command"><strong>"Drive to Nearest Scoring Location" Command</strong><a class="headerlink" href="#drive-to-nearest-scoring-location-command" title="Permanent link">&para;</a></h3>
+<p>Field-relative commands can also drive autonomously to a field coordinate — for example, aligning the robot to the nearest Reef branch before a score.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.controller.ProfiledPIDController</span><span class="p">;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.geometry.Pose2d</span><span class="p">;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.geometry.Rotation2d</span><span class="p">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">edu.wpi.first.math.trajectory.TrapezoidProfile</span><span class="p">;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DriveToNearestScoringLocation</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Pose2d</span><span class="o">&gt;</span><span class="w"> </span><span class="n">REEF_BRANCHES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Pose2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.1</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">180</span><span class="p">)),</span><span class="w">  </span><span class="c1">// example coordinates</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Pose2d</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">180</span><span class="p">)),</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Pose2d</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="mf">3.2</span><span class="p">,</span><span class="w"> </span><span class="n">Rotation2d</span><span class="p">.</span><span class="na">fromDegrees</span><span class="p">(</span><span class="mi">150</span><span class="p">))</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">        </span><span class="c1">// ... all reef branch poses</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Pose2d</span><span class="w"> </span><span class="n">target</span><span class="p">;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProfiledPIDController</span><span class="w"> </span><span class="n">xController</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">ProfiledPIDController</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TrapezoidProfile</span><span class="p">.</span><span class="na">Constraints</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">));</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProfiledPIDController</span><span class="w"> </span><span class="n">yController</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">ProfiledPIDController</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TrapezoidProfile</span><span class="p">.</span><span class="na">Constraints</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">));</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProfiledPIDController</span><span class="w"> </span><span class="n">rotController</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">ProfiledPIDController</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TrapezoidProfile</span><span class="p">.</span><span class="na">Constraints</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">,</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DriveToNearestScoringLocation</span><span class="p">(</span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">;</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="w">        </span><span class="n">rotController</span><span class="p">.</span><span class="na">enableContinuousInput</span><span class="p">(</span><span class="o">-</span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">,</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="p">);</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="w">        </span><span class="n">addRequirements</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">);</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="w">        </span><span class="n">Pose2d</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">getPose</span><span class="p">();</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="w">        </span><span class="c1">// Find the nearest reef branch</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REEF_BRANCHES</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="w">            </span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingDouble</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">getTranslation</span><span class="p">()</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="w">                </span><span class="p">.</span><span class="na">getDistance</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getTranslation</span><span class="p">())))</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="w">            </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">();</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a><span class="w">        </span><span class="n">xController</span><span class="p">.</span><span class="na">reset</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getX</span><span class="p">());</span>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a><span class="w">        </span><span class="n">yController</span><span class="p">.</span><span class="na">reset</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getY</span><span class="p">());</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a><span class="w">        </span><span class="n">rotController</span><span class="p">.</span><span class="na">reset</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getRotation</span><span class="p">().</span><span class="na">getRadians</span><span class="p">());</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a><span class="w">        </span><span class="n">Pose2d</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">getPose</span><span class="p">();</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a><span class="w">        </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">driveFieldRelative</span><span class="p">(</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="w">            </span><span class="n">xController</span><span class="p">.</span><span class="na">calculate</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getX</span><span class="p">(),</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getX</span><span class="p">()),</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a><span class="w">            </span><span class="n">yController</span><span class="p">.</span><span class="na">calculate</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getY</span><span class="p">(),</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getY</span><span class="p">()),</span>
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a><span class="w">            </span><span class="n">rotController</span><span class="p">.</span><span class="na">calculate</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">getRotation</span><span class="p">().</span><span class="na">getRadians</span><span class="p">(),</span>
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a><span class="w">                                    </span><span class="n">target</span><span class="p">.</span><span class="na">getRotation</span><span class="p">().</span><span class="na">getRadians</span><span class="p">())</span>
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>
+<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isFinished</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">xController</span><span class="p">.</span><span class="na">atGoal</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">yController</span><span class="p">.</span><span class="na">atGoal</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rotController</span><span class="p">.</span><span class="na">atGoal</span><span class="p">();</span>
+<a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>
+<a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">end</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">interrupted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a><span class="w">        </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
+<a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a><span class="p">}</span>
+</code></pre></div>
+<p>Bind it to a button in <code>RobotContainer</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">driver</span><span class="p">.</span><span class="na">x</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DriveToNearestScoringLocation</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">));</span>
+</code></pre></div>
+<hr />
+<h2 id="part-6-vision-dropout-recovery-and-graceful-degradation"><strong>Part 6: Vision-Dropout Recovery and Graceful Degradation</strong><a class="headerlink" href="#part-6-vision-dropout-recovery-and-graceful-degradation" title="Permanent link">&para;</a></h2>
+<p>Vision is unreliable during a match — tags are blocked, the camera is bumped, the robot spins too fast for the solver to keep up. The robot must continue to function correctly when vision is unavailable.</p>
+<h3 id="dropout-detection"><strong>Dropout Detection</strong><a class="headerlink" href="#dropout-detection" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VisionSubsystem</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SubsystemBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">DROPOUT_THRESHOLD_SECONDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">lastValidTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getLatestEstimate</span><span class="p">();</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">estimate</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">tagCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">            </span><span class="n">lastValidTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Timer</span><span class="p">.</span><span class="na">getFPGATimestamp</span><span class="p">();</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isDroppedOut</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Timer</span><span class="p">.</span><span class="na">getFPGATimestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastValidTimestamp</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">DROPOUT_THRESHOLD_SECONDS</span><span class="p">;</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getSecondsSinceLastUpdate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Timer</span><span class="p">.</span><span class="na">getFPGATimestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastValidTimestamp</span><span class="p">;</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="adapting-autonomous-behavior"><strong>Adapting Autonomous Behavior</strong><a class="headerlink" href="#adapting-autonomous-behavior" title="Permanent link">&para;</a></h3>
+<p>A vision-assisted path-following routine should:</p>
+<ol>
+<li>Run normally when vision is healthy</li>
+<li>Fall back to odometry-only when vision drops out</li>
+<li>Resume vision corrections automatically when tags reappear</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">visionAssistedPath</span><span class="p">(</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">,</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="n">VisionSubsystem</span><span class="w"> </span><span class="n">vision</span><span class="p">,</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">trajName</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="c1">// Log a warning if vision is already dropped out at the start</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">runOnce</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vision</span><span class="p">.</span><span class="na">isDroppedOut</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">                </span><span class="n">DriverStation</span><span class="p">.</span><span class="na">reportWarning</span><span class="p">(</span><span class="s">&quot;Vision dropout at auto start — running odometry only&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">        </span><span class="p">}),</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">        </span><span class="n">AutonomousCommands</span><span class="p">.</span><span class="na">followPath</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">,</span><span class="w"> </span><span class="n">trajName</span><span class="p">)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="c1">// The pose estimator handles vision dropout automatically:</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">        </span><span class="c1">// addVisionMeasurement() simply isn&#39;t called when there are no valid estimates,</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">        </span><span class="c1">// so odometry carries the pose until vision recovers.</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="re-seeding-after-a-known-good-pose"><strong>Re-Seeding After a Known-Good Pose</strong><a class="headerlink" href="#re-seeding-after-a-known-good-pose" title="Permanent link">&para;</a></h3>
+<p>When the robot starts a match, its position is known exactly. After a dropout-heavy auto, the accumulated drift may be significant. One pattern is to re-seed the estimator when a fresh high-quality measurement arrives (multiple tags, close distance):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">maybeReseedPose</span><span class="p">(</span><span class="n">LimelightHelpers</span><span class="p">.</span><span class="na">PoseEstimate</span><span class="w"> </span><span class="n">estimate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">highQuality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">tagCount</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">estimate</span><span class="p">.</span><span class="na">avgTagDist</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">significantDrift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPose</span><span class="p">().</span><span class="na">getTranslation</span><span class="p">()</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="p">.</span><span class="na">getDistance</span><span class="p">(</span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">.</span><span class="na">getTranslation</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.3</span><span class="p">;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">highQuality</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">significantDrift</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">        </span><span class="c1">// Hard reset — use sparingly; can cause visible jumps</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">        </span><span class="n">resetOdometry</span><span class="p">(</span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">);</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Coach</p>
+<p><!-- category: let them fail here -->
+Students almost always start by hard-resetting the pose on every frame. The robot twitches visibly as the pose jumps with each new measurement. Let them observe this, then introduce the pose estimator's blending approach as the solution. The contrast makes the Kalman filter intuition stick.</p>
+</div>
+<hr />
+<h2 id="capstone-vision-assisted-two-piece-auto"><strong>Capstone: Vision-Assisted Two-Piece Auto</strong><a class="headerlink" href="#capstone-vision-assisted-two-piece-auto" title="Permanent link">&para;</a></h2>
+<p>This capstone builds a complete two-piece autonomous routine that uses Level 5 path following, motion profiling from Level 5 Part 7, and vision corrections from this level. It degrades gracefully if vision drops out.</p>
+<h3 id="visionposeupdaterjava"><strong><code>VisionPoseUpdater.java</code></strong><a class="headerlink" href="#visionposeupdaterjava" title="Permanent link">&para;</a></h3>
+<p>A dedicated subsystem that owns vision-to-pose-estimator integration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VisionPoseUpdater</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SubsystemBase</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">VisionSubsystem</span><span class="w"> </span><span class="n">vision</span><span class="p">;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">VisionPoseUpdater</span><span class="p">(</span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">,</span><span class="w"> </span><span class="n">VisionSubsystem</span><span class="w"> </span><span class="n">vision</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">drivetrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">vision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vision</span><span class="p">;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">        </span><span class="c1">// Provide current heading to MegaTag2 solver</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">        </span><span class="n">vision</span><span class="p">.</span><span class="na">enableMegaTag2</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">.</span><span class="na">getGyroAngle</span><span class="p">().</span><span class="na">getDegrees</span><span class="p">());</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vision</span><span class="p">.</span><span class="na">getLatestEstimate</span><span class="p">();</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">drivetrain</span><span class="p">.</span><span class="na">isValidEstimate</span><span class="p">(</span><span class="n">estimate</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="w">            </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">addVisionMeasurement</span><span class="p">(</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="w">                </span><span class="n">estimate</span><span class="p">.</span><span class="na">pose</span><span class="p">,</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="w">                </span><span class="n">estimate</span><span class="p">.</span><span class="na">timestampSeconds</span><span class="p">,</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="w">                </span><span class="n">drivetrain</span><span class="p">.</span><span class="na">getVisionStdDevs</span><span class="p">(</span><span class="n">estimate</span><span class="p">)</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="w">            </span><span class="p">);</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="autonomousroutinesjava-vision-assisted"><strong><code>AutonomousRoutines.java</code> (Vision-Assisted)</strong><a class="headerlink" href="#autonomousroutinesjava-vision-assisted" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AutonomousRoutines</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">AutonomousRoutines</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="cm">/**</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="cm">     * Score preloaded piece, collect from source, score second piece.</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="cm">     * Applies vision corrections whenever tags are visible.</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="cm">     * Falls back to odometry automatically during dropouts.</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="cm">     */</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">scoreTwoPieceVision</span><span class="p">(</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">        </span><span class="n">DrivetrainSubsystem</span><span class="w"> </span><span class="n">drivetrain</span><span class="p">,</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">        </span><span class="n">ElevatorSubsystem</span><span class="w"> </span><span class="n">elevator</span><span class="p">,</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">        </span><span class="n">IntakeSubsystem</span><span class="w"> </span><span class="n">intake</span><span class="p">,</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">        </span><span class="n">VisionSubsystem</span><span class="w"> </span><span class="n">vision</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">sequence</span><span class="p">(</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">            </span><span class="c1">// ── Piece 1 ──────────────────────────────────────────────────────</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">            </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="w">                </span><span class="c1">// Drive to scoring position</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="w">                </span><span class="n">AutonomousCommands</span><span class="p">.</span><span class="na">followPath</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;StartToReef1&quot;</span><span class="p">),</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="w">                </span><span class="c1">// Stage elevator while driving (saves ~0.4 s)</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="w">                </span><span class="n">ElevatorCommands</span><span class="p">.</span><span class="na">goTo</span><span class="p">(</span><span class="n">elevator</span><span class="p">,</span><span class="w"> </span><span class="n">ElevatorPosition</span><span class="p">.</span><span class="na">L3</span><span class="p">)</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">                    </span><span class="p">.</span><span class="na">unless</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="n">elevator</span><span class="p">.</span><span class="na">isHealthy</span><span class="p">())</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="w">            </span><span class="p">),</span>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a><span class="w">            </span><span class="n">IntakeCommands</span><span class="p">.</span><span class="na">feed</span><span class="p">(</span><span class="n">intake</span><span class="p">).</span><span class="na">withTimeout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a><span class="w">            </span><span class="c1">// ── Travel to source ─────────────────────────────────────────────</span>
+<a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a><span class="w">            </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
+<a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a><span class="w">                </span><span class="n">AutonomousCommands</span><span class="p">.</span><span class="na">followPath</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reef1ToSource&quot;</span><span class="p">),</span>
+<a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a><span class="w">                </span><span class="n">ElevatorCommands</span><span class="p">.</span><span class="na">goTo</span><span class="p">(</span><span class="n">elevator</span><span class="p">,</span><span class="w"> </span><span class="n">ElevatorPosition</span><span class="p">.</span><span class="na">INTAKE</span><span class="p">)</span>
+<a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a><span class="w">            </span><span class="p">),</span>
+<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="w">            </span><span class="n">IntakeCommands</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">intake</span><span class="p">).</span><span class="na">until</span><span class="p">(</span><span class="n">intake</span><span class="p">::</span><span class="n">hasPiece</span><span class="p">).</span><span class="na">withTimeout</span><span class="p">(</span><span class="mf">2.0</span><span class="p">),</span>
+<a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a>
+<a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="w">            </span><span class="c1">// ── Piece 2 ──────────────────────────────────────────────────────</span>
+<a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a><span class="w">            </span><span class="n">Commands</span><span class="p">.</span><span class="na">parallel</span><span class="p">(</span>
+<a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a><span class="w">                </span><span class="n">AutonomousCommands</span><span class="p">.</span><span class="na">followPath</span><span class="p">(</span><span class="n">drivetrain</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SourceToReef2&quot;</span><span class="p">),</span>
+<a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a><span class="w">                </span><span class="n">ElevatorCommands</span><span class="p">.</span><span class="na">goTo</span><span class="p">(</span><span class="n">elevator</span><span class="p">,</span><span class="w"> </span><span class="n">ElevatorPosition</span><span class="p">.</span><span class="na">L4</span><span class="p">)</span>
+<a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a><span class="w">                    </span><span class="p">.</span><span class="na">unless</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="n">elevator</span><span class="p">.</span><span class="na">isHealthy</span><span class="p">())</span>
+<a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="w">            </span><span class="p">),</span>
+<a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a><span class="w">            </span><span class="n">IntakeCommands</span><span class="p">.</span><span class="na">feed</span><span class="p">(</span><span class="n">intake</span><span class="p">).</span><span class="na">withTimeout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+<a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a>
+<a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a><span class="w">            </span><span class="c1">// Stow and stop</span>
+<a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a><span class="w">            </span><span class="n">ElevatorCommands</span><span class="p">.</span><span class="na">goTo</span><span class="p">(</span><span class="n">elevator</span><span class="p">,</span><span class="w"> </span><span class="n">ElevatorPosition</span><span class="p">.</span><span class="na">STOWED</span><span class="p">)</span>
+<a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="key-design-decisions"><strong>Key Design Decisions</strong><a class="headerlink" href="#key-design-decisions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Decision</th>
+<th style="text-align: left;">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vision updating runs in <code>VisionPoseUpdater.periodic()</code></td>
+<td style="text-align: left;">Decouples vision from drivetrain; path follower reads corrected pose transparently</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>unless(() -&gt; !elevator.isHealthy())</code> guards</td>
+<td style="text-align: left;">If the elevator faults, skip staging — robot still drives the path and scores at current height</td>
+</tr>
+<tr>
+<td style="text-align: left;">No explicit vision guard in auto</td>
+<td style="text-align: left;"><code>addVisionMeasurement()</code> is a no-op when called with bad data; the filter handles dropout automatically</td>
+</tr>
+<tr>
+<td style="text-align: left;">Timestamps from <code>estimate.timestampSeconds</code></td>
+<td style="text-align: left;">Latency compensation is always on — the estimator back-projects corrections correctly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="try-this"><strong>Try This</strong><a class="headerlink" href="#try-this" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add a <code>sendable</code> chooser in <code>RobotContainer</code> that offers "Vision Auto" vs. "Odometry-Only Auto" for events where the field has damaged tags</li>
+<li>Tune the stdDevs by logging <code>drivetrain.getPose()</code> vs. raw vision pose across several test runs and computing average error at different distances</li>
+<li>Add a <code>ShuffleboardTab</code> that shows: last vision update age, tag count, current pose, estimated error</li>
+</ul>
+<blockquote>
+<p><strong>Full project:</strong> <a href="https://github.com/CyberCoyotes/Programmers-Handbook/tree/main/companion/level-6/VisionAssistedAuto"><code>companion/level-6/VisionAssistedAuto</code></a></p>
+</blockquote>
+<hr />
+<h2 id="reference-card"><strong>Reference Card</strong><a class="headerlink" href="#reference-card" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Concept</th>
+<th style="text-align: left;">Key Class / Method</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vision pose reading</td>
+<td style="text-align: left;"><code>LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2()</code></td>
+<td style="text-align: left;">Call after <code>SetRobotOrientation()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">MegaTag2 orientation</td>
+<td style="text-align: left;"><code>LimelightHelpers.SetRobotOrientation()</code></td>
+<td style="text-align: left;">Pass current gyro heading each loop</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pose estimator</td>
+<td style="text-align: left;"><code>SwerveDrivePoseEstimator</code></td>
+<td style="text-align: left;">Drop-in replacement for <code>SwerveDriveOdometry</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Vision fusion</td>
+<td style="text-align: left;"><code>poseEstimator.addVisionMeasurement(pose, timestamp, stdDevs)</code></td>
+<td style="text-align: left;">Use <code>estimate.timestampSeconds</code>, not current time</td>
+</tr>
+<tr>
+<td style="text-align: left;">Standard deviations</td>
+<td style="text-align: left;"><code>VecBuilder.fill(x, y, rot)</code></td>
+<td style="text-align: left;">Lower = more trust; never trust vision rotation</td>
+</tr>
+<tr>
+<td style="text-align: left;">Field-relative speeds</td>
+<td style="text-align: left;"><code>ChassisSpeeds.fromFieldRelativeSpeeds()</code></td>
+<td style="text-align: left;">Pass <code>getPose().getRotation()</code> as heading</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dropout detection</td>
+<td style="text-align: left;">Compare <code>Timer.getFPGATimestamp()</code> vs. last valid timestamp</td>
+<td style="text-align: left;">Use to warn drivers; estimator handles it automatically</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="whats-next"><strong>What's Next?</strong><a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>You have now completed the full progression from Java basics to competition-level vision-assisted robotics. The patterns in this handbook are what top-10% FRC teams use every season.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Level 6 Skill</th>
+<th style="text-align: left;">Where to Go Next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vision pose estimation</td>
+<td style="text-align: left;">Explore PhotonVision as an alternative coprocessor; compare accuracy at distance</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pose estimator / Kalman filter</td>
+<td style="text-align: left;">Study AdvantageKit's logging-first approach to debugging estimator state</td>
+</tr>
+<tr>
+<td style="text-align: left;">Field-relative scoring commands</td>
+<td style="text-align: left;">Add vision-alignment fine-correction on top of path-following (two-stage: coarse path, fine vision snap)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Graceful degradation</td>
+<td style="text-align: left;">Build fault trees for every sensor on the robot; practice "sensor unplugged" drills before competition</td>
+</tr>
+<tr>
+<td style="text-align: left;">Full command-based + vision</td>
+<td style="text-align: left;">Read and contribute to your team's competition codebase — you have the tools</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

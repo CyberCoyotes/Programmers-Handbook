@@ -1,0 +1,43 @@
+p {
+	font-family: 'SolberaImitationRemake';
+}
+
+/***********************
+// *           HEADERS
+// *****************************/
+h1,h2,h3,h4 {
+	font-family : 'MrEavesRemake';
+	color       : #58180D;
+}
+
+h1 {
+	color       : #58180D;
+}
+
+
+.wy-body-for-nav {
+    background-image: url("parchmentBackground.jpg");
+    background-color: #EEE5CE00;
+}
+
+.wy-nav-content {
+		/* background-color: rgb(150, 141, 138); */
+		background-image: url("parchmentBackground.jpg");
+		background: #EEE5CE00;
+	}
+
+.wy-side-nav-search {
+	/*
+	display: block;
+	width: 300px;
+	padding: 0.809em;
+	margin-bottom: 0.809em;
+	z-index: 200;
+	
+	text-align: center;
+	*/
+	/* color: #fcfcfc; */
+	/* background-color: rgba(0,0,0,0);*/
+	background-color: #EEE5CE00; 
+}
+
